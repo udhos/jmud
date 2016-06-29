@@ -1,0 +1,12 @@
+LONG= 
+"Continua na
+proxima linha: ${HELLO_WORLD}";
+WORLD="mundo";
+HELLO_WORLD = "ola ${WORLD}!";
+
+HELLO_HELLO = "nada";
+
+ERROR="missing ${THIS}";
+
+A="inclui ${B}";
+B="tabem inclui ${A}";

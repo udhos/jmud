@@ -1,0 +1,82 @@
+#100
+Centro do Laboratório Experimental
+centro laboratorio experimental testes
+  Esta é a sala central da área de testes. As salas ao redor desta são 
+utilizadas para experimentos específicos, que auxiliam o desenvolvimento 
+do sistema.
+~
+-
+n 110 
+s 120 
+l 130 
+o 140
+$
+#110
+Sala de Bloqueio de Passagem
+sala bloqueio passagem
+  Esta sala é utilizada para testar bloqueio de passagem com um guardião.
+~
+-
+n 111
+s 100
+$
+#111
+Sala Proibida
+sala proibida
+  O guardião não deveria deixar que ninguém chegasse aqui.
+~
+-
+s 110
+$
+#120
+Sala Desocupada
+sala desocupada livre
+  Sala não alocada para testes.
+~
+-
+n 100
+$
+#130
+Sala Desocupada
+sala desocupada livre
+  Sala não alocada para testes.
+~
+-
+l 131
+o 100
+$
+#131
+Sala de Mestre
+sala mestre
+  Um bom lugar para o ensino.
+~
+-
+l 132
+o 130
+$
+#132
+Sala de Mestre
+sala mestre
+  Um bom lugar para o ensino.
+~
+-
+o 131
+$
+#140
+Sala Desocupada
+sala desocupada livre
+  Sala não alocada para testes.
+~
+-
+l 100
+o 141
+$
+#141
+Loja da Sasha
+loja sasha
+  Aqui pode ser testado o sistema de lojas.
+~
+-
+l 140
+$
+%

@@ -1,0 +1,510 @@
+----------------------------------------------------------------------
+FORMATOS                        início                            JMud
+----------------------------------------------------------------------
+
+INTRODUÇÃO
+
+  Este documento descreve sucintamente o formato dos arquivos de
+  dados.
+
+
+ESPECIFICAÇÃO
+
+
+# = Identificador do objeto (marca início de um registro)
+$ = Fim de uma seção de comprimento variável (normalmente um registro)
+~ = Fim de descrição
+% = Fim de arquivo
+; = Comentário (apenas em Configuração, Automação e Zona)
+
+
+Arquivo de Configuracao
+[
+; tipicamente: jmud.cfg
+
+; IMPORTANTE: nomes de diretorio terminam com "/" (barra)
+;             e nomes de arquivo *nao*
+; Exemplo:
+;
+; DiretorioDeMundo        rec/mun/
+; ArquivoDeMundo          minimo.mun
+
+ZonaInicial		<numero da zona>
+SalaInicial		<numero da sala>
+
+DiretorioDeMundo	<diretório de mundo>
+ArquivoDeMundo		<arquivo de mundo>
+
+ArquivoDeAjuda		<arquivo de ajuda>
+ArquivoDeEstado         <arquivo de estado>
+
+; no diretorio de usuarios nao pode haver outros arquivos 
+; senao aqueles criados pelo JMud para os usuarios
+;
+DiretorioDeUsuarios	<diretorio dos arquivos de usuarios>
+
+; no diretório de posses não pode haver arquivos
+; que não os criados pelo jmud para armazenar
+; os ítens dos usuários
+;
+DiretorioDePosses       <diretório dos pertences dos usuarios>
+
+; se algum usuário engraçadinho tentar repetir um
+; mesmo comando mais de MaximoDeAbuso vezes,
+; o jmud começa a ignorar os próximos comandos repetidos
+;
+MaximoDeAbuso		<máximo de abuso>
+
+ArquivoDeMensagemDoDia	<arquivo com a mensagem do dia>
+
+; MaximoDeClientes representa a quantidade máxima de
+; clientes que podem estar simultaneamente conectados
+; ao JMud.
+;
+; Este parâmetro só está limitado pela quantidade
+; de recursos (memória, CPU, disco) disponível.
+;
+MaximoDeClientes			<máximo de clientes>
+
+ArquivoDeSubversao			<arquivo com a sub-versão>
+
+ArquivoDeSintaxe			<arquivo com sintaxe dos comandos>
+
+ArquivoDeDependenciaDeHabilidades	<arquivo de dependências das habil.s>
+
+ArquivoDeProfissoesDasHabilidades	<arquivo com as habil.s das profissoes>
+
+%
+]
+
+
+Arquivo de Mundo
+[
+#mmm
+<título do mundo>
+<zona1.zon>	[<dir1>]
+<zona2.zon>     [<dir2>]
+...
+<zonaN.zon>	[<dirN>]
+$
+n|s|l|o|c|b <zona origem> <sala origem> <zona destino> <sala destino>
+...
+%
+]
+
+
+Arquivo de Zona
+[
+#zzz
+<título da zona>
+<nome da zona>
+<base> <faixa> <período para automação>
+;
+; A partir daqui pode haver comentários e
+; linhas em branco.
+;
+
+s salas.sal
+i itens.ite
+c criaturas.cri
+a automações.aut
+l lojas.loj
+%
+]
+
+OBS.: i) o título da zona é puramente cosmético
+      ii) o nome dela é usado como chave e deve ser apenas uma palavra
+
+
+Arquivo de Salas
+[
+#sss_1
+<título da sala>
+<sin1> ... <sinN> | -
+Descrição, linha 1
+...
+Descrição, linha N
+~
+<propriedades>
+n|s|l|o|c|b <sss> [<propriedades>]
+...
+n|s|l|o|c|b <sss> [<propriedades>]
+$
+#sss_N
+...
+$
+%
+]
+
+Propriedades da sala:
+
+P_CLOSEABLE = 0;  // a
+P_LOCKABLE  = 1;  // b
+P_HIDDEN    = 2;  // c
+
+
+Arquivo de Criaturas
+[
+#ccc_1
+<espécie da criatura>
+<nome da criatura>
+<sin1> ... <sinN>
+<linha de descrição breve>
+<descrição1>
+...
+<descriçãoN>
+~
+<nivel> <sexo> <propriedades> 
+<experiencia> 
+<bondade> <maldade>
+<ouro> po <prata> pp <bronze> pb <cravos> cr
+<gancho_1> ... <gancho_N> | -
+t <valor>
+a <atributo> <valor>
+l <linha> <valor>
+c <coluna> <valor>
+fis <sentidos>  <destreza>     <força>        <corpo>     <vigor>
+men <prontidão> <raciocínio>   <inteligência> <mente>     <vontade>
+mis <atenção>   <fantasma>     <aura>         <espírito>  <alma>
+soc <malícia>   <manipulação>  <carisma>      <aparência> <confiança>
+per <sentidos>  <prontidão>    <atenção>      <malícia>
+agi <destreza>  <raciocínio>   <fantasma>     <manipulação>
+aca <força>     <inteligência> <aura>         <carisma>
+res <corpo>     <mente>        <espírito>     <aparência>
+vit <vigor>     <vontade>      <alma>         <confiança>
+$
+t <valor> [+|-]
+a <atributo> <valor> [+|-]
+l <linha> <valor> [+|-]
+c <coluna> <valor> [+|-]
+$
+#ccc_N
+...
+$ 
+%
+]
+
+
+P_WALKER = Bit.BIT0;
+
+S_NEUTRAL = 0;
+S_MALE    = 1;
+S_FEMALE  = 2;
+
+C_PHY = 0;
+C_MEN = 1;
+C_MYS = 2;
+C_SOC = 3;
+
+R_PER = 0;
+R_AGI = 1;
+R_ACT = 2;
+R_RES = 3;
+R_VIT = 4;
+
+A_SEN = 0;
+A_ALE = 1;
+A_AWA = 2;
+A_SLY = 3;
+A_DEX = 4;
+A_WIT = 5;
+A_GHO = 6;
+A_MAN = 7;
+A_STR = 8;
+A_INT = 9;
+A_AUR = 10;
+A_CHA = 11;
+A_BOD = 12;
+A_MIN = 13;
+A_SPI = 14;
+A_APP = 15;
+A_STA = 16;
+A_WIL = 17;
+A_SOU = 18;
+A_CON = 19;
+
+           PHYSICAL  MENTAL       MYSTIC    SOCIAL
+PERCEPTION sense     alertness    awareness slyness
+AGILITY    dexterity witness      ghost     manipulation
+ACTION     strength  intelligence aura      charisma
+RESISTANCE body      mind         spirit    appearance
+VITALITY   stamina   will         soul      confidence
+
+
+Arquivos de Itens
+[
+#iii_1
+<categoria do item>
+<nome do item>
+<sin1> ... <sinN>
+<linha de descrição breve>
+<descrição1>
+...
+<descriçãoN>
+~
+<nivel> <carga> <valor> <propriedades> <onde>
+<campos variáveis segundo a categoria> (*)
+$
+#iii_N
+...
+$
+%
+]
+
+T_NONE      = 0;
+T_WEAPON    = 1;
+T_ARMOR     = 2;
+T_CONTAINER = 3;
+T_BOARD     = 4;
+T_KEY       = 5;
+T_CURRENCY  = 6;
+
+P_CANTAKE   = 0; // a
+P_WEARALL   = 1; // b
+P_INVISIBLE = 2; // c
+P_GLOWING   = 3; // d
+P_HUMMING   = 4; // e
+P_PHYSICAL  = 5; // f
+P_MENTAL    = 6; // g
+P_MYSTIC    = 7; // h
+P_VOLATILE  = 8; // i -- nao pode ser salvo
+P_STATIC    = 9; // j -- nao pode ser modificado
+
+W_LHOLD     = 0;  // a
+W_RHOLD     = 1;  // b
+W_HEAD      = 2;  // c
+W_NECK      = 3;  // d
+W_BODY      = 4;  // e
+W_WAIST     = 5;  // f
+W_AROUND    = 6;  // g
+W_LSHOULDER = 7;  // h
+W_RSHOULDER = 8;  // i
+W_LARM      = 9;  // j
+W_RARM      = 10; // k 
+W_LWRIST    = 11; // l
+W_RWRIST    = 12; // m
+W_LHAND     = 13; // n
+W_RHAND     = 14; // o
+W_LFINGER   = 15; // p
+W_RFINGER   = 16; // q
+W_LLEG      = 17; // r
+W_RLEG      = 18; // s
+W_LFOOT     = 19; // t
+W_RFOOT     = 20; // u
+
+B_ADMIN    = 0;
+B_IMMORTAL = 1;
+B_SOCIAL   = 2;
+
+
+* Legenda:
+Categoria	Campos
+arma		<físico> <mental> <espiritual> <tipo de dano>
+armadura	<físico> <mental> <espiritual>
+recipiente	<capacidade>
+quadro		<sistema de quadros>
+chave		<sala> <direcao>	(exemplo: 666 n)
+                ...
+		$
+moeda		<tipo> <valor>
+
+
+Tipos de dano:
+
+
+Arquivo de Automação
+[
+;
+; Este aqui também aceita comentários
+; e linhas em branco
+;
+
+i <condição> <máximo> <ítem> <sala>       ; um comentário pode vir aqui também
+c <condição> <máximo> <criatura> <sala>
+d <condição> <máximo> <ítem> <criatura>
+e <condição> <máximo> <ítem> <criatura>
+p <condição> <máximo> <ítem> <recipiente>
+x <condição> <criatura> <gancho>
+
+a|f|t|l <condição> <sala> <direção> ; abre/fecha/tranca/libera(?) porta
+s <condicao> <sala> <direcao> a|f|t|d ; abre/fecha/tranca/destranca
+
+...
+%
+]
+
+
+Arquivo de Lojas
+[
+#lll_1
+<nome da loja>
+<compra> <venda>
+<classes de itens comprados>
+<moedas aceitas>
+<vendedor>
+<produto1>
+...
+<produtoN>
+$
+#lll_N
+...
+$
+%
+]
+
+
+Arquivo de Ajuda
+[
+#<sin1> ... <sinN>
+Texto de ajuda, linha 1
+...
+Texto de ajuda, linha N
+$
+...
+%
+]
+
+
+Arquivo de Usuario
+[
+<nome>
+<senha>
+<descrição>
+~
+<preferências>
+<sala> <posto de invisibilidade>
+<posto> <nível>
+<posição> <sexo>
+<experiência> <experiência acumulada>
+<bondade> <maldade>
+<lutas>    <assassinatos> <mortes>        <fugas>
+<sentidos> <prontidão>    <sensitividade> <malícia>
+<destreza> <raciocínio>   <fantasma>      <manipulação>
+<força>    <inteligência> <aura>          <carisma>
+<corpo>    <mente>        <espírito>      <aparência>
+<vigor>    <vontado>      <alma>          <confiança>
+<t_vigor>  <t_vontade>    <t_alma>        <t_confiança>
+<ouro> po <prata> pp <bronze> pb <cravos> cr
+<host1> ... <hostN>
+<magia1>,<magia2>,...,<magiaN>
+<profissao1>=<nivel1>,...,<profissaoN>=<nivelN>
+<habilidade1>=<nivel1>,...,<habilidadeN>=<nivelN>
+%
+]
+
+
+Arquivo de Profissões das Habilidades
+[
+;
+; comentarios e linhas em branco sao permitidos
+;
+
+<habilidade>: <profissao1> ... <profissaoN>
+...
+
+]
+
+
+Arquivo de Dependências de Habilidades
+[
+;
+; comentarios e linhas em branco sao permitidos
+;
+
+<habilidade>: <habilidade1> ... <habilidadeN>
+...
+
+]
+
+
+============
+NOVA SINTAXE
+============
+
+Os arquivos especificados abaixo estão no formato da nova sintaxe de
+descrição de elementos do mundo. Esse novo formato é baseado na idéia
+de listas e mapas potencialmente aninhados em uma estrutura
+hierárquica.
+
+Todo arquivo contém uma lista de entradas. Uma entrada pode ser ou um
+valor, ou outra lista, ou um mapa. Um valor pode ser um identificador,
+um número, ou uma cadeia de caracteres delimitada por aspas. Um mapa é
+uma coleção de pares atributo-conteúdo. Um atributo é o mesmo que um
+valor. Um conteúdo é o mesmo que uma entrada.
+
+Listas são delimitadas por parêntesis: ( ).
+
+Mapas são delimitados por chaves: { }.
+
+O concatenador de entradas e de pares atributo-conteúdo é sempre o
+ponto-e-vírgula (;).
+
+Exemplos:
+
+VALORES
+42
+habilidade
+"Uma folha de papel."
+
+LISTAS
+(1; 2)
+("45 vezes"; tempo; 3; { x = 1 })
+
+MAPAS
+{
+	titulo  = "Aprendiz.";
+	idade   = 22;
+	rotulos = ("pequeno"; "indefeso")
+}
+{
+	13 = "observe um número usado como atributo";
+	uma_lista = ("nada"; "util"; "para ninguem");
+	"atributo com brancos" = identificador_valido_aqui;
+	mapa_aninhado = {
+		observacao = "estruturas arbitrariamente complexas \
+			     \podem ser criadas"
+	}
+}
+
+Comentários funcionam como brancos (separadores de terminais) e podem
+aparecer em qualquer lugar, exceto no interior de cadeias de
+caracteres. Um bloco de comentário é iniciado por "/*" e terminado por
+"*/" (ambos sem as aspas).
+
+
+ARQUIVO DE MESTRES
+------------------
+
+O arquivo de mestres é uma lista de mapas. Cada mapa define um
+mestre. Os seguintes pares são reconhecidos:
+
+
+ATRIBUTO		CONTEÚDO
+criatura_id		número: identifica a criatura que exerce o papel
+                        de mestre
+habilidades_ensinadas	mapa: cada par leva o nome da habilidade ao nível
+                              da habilidade
+profissões_ensinadas	mapa: cada par leva o nome da profissão ao nível
+                              da profissão
+
+Exemplo:
+(
+	{
+		/* Buda */
+
+		criatura_id = 130;
+		habilidades_ensinadas = {
+			"serenidade" = 10;
+			"foco"       = 10
+		};
+		profissoes_ensinadas = {
+			"guerreiro" = 10;
+			"monge"     = 10
+		}
+	}
+)
+
+
+----------------------------------------------------------------------
+FORMATOS                          fim                             JMud
+----------------------------------------------------------------------

@@ -1,0 +1,87 @@
+#1
+Cubículo Apertado
+cubiculo apertado cela masmorra cidadela
+  Este lugar é uma diminuta sala de paredes rochosas. Há poeira cobrindo o
+chão e pedaços de pedra que se soltaram das paredes. Uma branda iluminação
+aparece por baixo da porta a leste.
+~
+-
+l 2 ab
+$
+#2
+Corredor de Acesso
+corredor acesso masmorra cidadela
+  Este corredor conduz a várias celas, todas com espessas portas metálicas
+enferrujadas. Uma escada de madeira leva ao nível superior.
+~
+-
+o 1 ab
+l 3 ab
+s 4 ab
+n 5 ab
+c 20
+$
+#3
+Cubículo Apertado
+cubiculo apertado cela masmorra cidadela
+  Este lugar é uma diminuta sala de paredes rochosas. Há poeira cobrindo o
+chão e pedaços de pedra que se soltaram das paredes. Uma branda iluminação
+aparece por baixo da porta a oeste.
+~
+-
+o 2 ab
+$
+#4
+Cubículo Apertado
+cubiculo apertado cela masmorra cidadela
+  Este lugar é uma diminuta sala de paredes rochosas. Há poeira cobrindo o
+chão e pedaços de pedra que se soltaram das paredes. Uma branda iluminação
+aparece por baixo da porta ao norte.
+~
+-
+n 2 ab
+$
+#5
+Cubículo Apertado
+cubiculo apertado cela masmorra cidadela
+  Este lugar é uma diminuta sala de paredes rochosas. Há poeira cobrindo o
+chão e pedaços de pedra que se soltaram das paredes. Forte odor putrefato 
+permeia o ambiente. Uma branda iluminação aparece por baixo da porta ao sul.
+~
+-
+s 2 ab
+b 6 ac
+$
+#6
+Passagem Secreta
+passagem secreta tunel masmorra cidadela
+  Este túnel rudimentar parece ter sido precariamente escavado através da 
+rocha que compõe as paredes da masmorra. Não conduz muito além.
+~
+-
+c 5 a
+$
+#20
+Entrada da Masmorra
+entrada masmorra cidadela
+  Uma modesta sala de paredes enegrecidas. Algemas, correntes, bolas
+metálicas e instrumentos de torturas estão dependurados em ganchos. A velha 
+escada de madeira abre caminho para baixo.  
+~
+-
+b 2 
+l 21 ab
+$
+#21
+A Prisão
+prisao masmorra cidadela
+  A prisão local, construída e escavada inteiramente em pedra. A oeste, 
+uma porta de segurança dificulta a fuga da masmorra. Após a porta leste, 
+pode-se ver a Rua da Agonia.
+~
+-
+o 20 ab
+l 100
+$
+%
+  

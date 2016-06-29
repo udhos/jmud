@@ -1,0 +1,180 @@
+--------------------------------------------------------------------------
+$Id: LEIAME,v 1.1 2001/12/02 19:21:38 fmatheus Exp $
+--------------------------------------------------------------------------
+
+COPYRIGHT NOTICE
+
+  JMud - Servidor de Mud desenvolvido em Java
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program -- see the file COPYING; if not, write to
+  the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+  Boston, MA 02111-1307 USA 
+
+
+INTRODUÇÃO
+
+  O JMud é um servidor de mud escrito em Java(TM). Este documento espera 
+  que o leitor esteja familiarizado com os termos 'servidor', 'mud' e 
+  'Java'. 
+
+  Por enquanto, saiba que o JMud ainda está em estágio inicial; não deve
+  ser muito útil para quem não tem uma certa experiência com servidores
+  de mud.
+
+  Há _muita_ coisa pra escrever neste e em outros arquivos. Mas como o
+  JMud ainda carece de várias funcionalidades básicas de mud, a parte de
+  documentação provavelmente vai ter que esperar um pouco.
+
+
+OBTENDO NOVAS VERSÕES
+
+  A última versão do JMud pode ser obtida a partir de:
+
+    http://jmud.sourceforge.net
+
+
+REQUISITOS
+
+  O JMud é uma aplicação escrita em Java(TM). O bom disso é que ele
+  pode ser rodado em qualquer ambiente para o qual exista uma "máquina
+  virtual" de Java. A parte ruim é que, para ser capaz de executá-lo,
+  você vai precisar de duas ferramentas: um compilador Java e um
+  interpretador Java.
+
+  O Compilador Java é o programa que produzirá o código que a Máquina
+  Virtual Java consegue executar. Os desenvolvedores usam o Jikes da
+  instalação padrão Debian GNU/Linux.
+
+  O Interpretador Java é o programa que implementa a Máquina Virtual Java.
+  Os desenvolvedores usam o Kaffe da instalação padrão Debian GNU/Linux.
+
+  A Sun Microsystems disponibiliza um ambiente de desenvolvimento de
+  Java chamado Sun Java Development Kit (Sun JDK) para diversas
+  plataformas. Esse pacote inclui o compilador (javac) e o
+  interpretador (java), entre outras ferramentas. Note que o Sun JDK é
+  um produto comercial. Se você pretende utilizá-lo, certifique-se de
+  ler a licença de uso e aceitá-la antes de instalar o Sun JDK em sua
+  máquina.
+
+  Apache Ant é um ferramenta para facilitar a compilação, baseada em Java.
+  Ela cumpre a função do make, sem algumas de suas limitações.
+
+  * Consulte os links no final do arquivo.
+
+
+ESTE DIRETÓRIO
+
+LEIAME		- este arquivo
+TODO		- uma lista das principais mudanças e novas idéias
+build.xml	- automatiza a compilação  (requer Ant)
+jmud.cfg	- arquivo de configuração
+rec/		- o diretório com os arquivos de dados (consulte jmud.cfg)
+doc/		- repositório da documentação
+src/		- o código fonte
+src/jmud	- o próprio JMud
+src/jgp		- a biblioteca de programação genérica em java
+lib/		- alguns jar's para facilitar a compilação e execução
+lib/README	- referências para os fontes desse diretório
+lib/LICENSE.*	- as licenças para cada jar
+
+
+COMPILAÇÃO
+
+  ANT
+
+    Digite 'ant'.
+
+  SEM ANT
+
+    Digite:
+	cd src
+	jar xvf ../lib/java_cup_runtime.jar
+	jikes jmud/JMud.java
+
+  DICA: versões mais antigas do jikes precisam do parâmetro -encoding latin1
+  para suportar os caracteres acentuados em português. Apenas descomente a
+  linha sobre encoding no build.xml.
+
+  
+EXECUTANDO
+
+  ANT
+
+    Digite 'kaffe -jar dist/jmud*.jar'.
+
+  SEM ANT
+
+    Mova jmud.cfg e rec/ para dentro do src/.
+    Digite 'kaffe jmud.JMud'.
+
+  Uma quantidade enorme de informações de "logging" deve começar a
+  aparecer na tela.
+
+  Quando você vir a mensagem 'Esperando por conexões', o JMud estará
+  operacional.
+
+
+CLIENTES
+
+  O JMud prevê a utilização de clientes de telnet. Em uma outra
+  janela, execute 'telnet <host> <portnumber>'. <host> é a máquina
+  na qual você executou o JMud e <portnumber> é a porta onde ele está
+  aguardando conexões (o valor usual é 1234).
+
+  EXEMPLOS
+
+  1) JMud rodando na sua máquina e ouvindo na porta padrão:
+
+    telnet 127.0.0.1 1234
+
+  2) JMud rodando na máquina de nome 'zeus.provedor.com.br':
+
+    telnet zeus.provedor.com.br 1234
+
+
+DICAS
+
+  * O primeiro usuário a se conectar ao JMud, e apenas ele, pode ter
+  acesso aos privilégios do servidor através do comando
+  'moderador'. Demais usuários privilegiados terão de ser nomeados
+  pelo primeiro, mediante o comando 'promova'.
+
+  * Utilize o comando 'comandos' para listar os comandos a que seu
+  personagem tem acesso.
+
+
+SUPORTE
+
+  Há uma lista de discussão sobre os vários aspectos do JMud em:
+  
+    http://groups.yahoo.com/group/jmud
+
+  Ainda que raramente haja tempo para atendimento individual, é
+  possível me contatar diretamente a partir de:
+
+    Éverton da Silva Marques <evertonm@users.sourceforge.net>
+
+
+LINKS ÚTEIS
+
+  Kaffe,	http://www.kaffe.org
+  Jikes,	http://oss.software.ibm.com/developerworks/opensource/jikes
+  Sun JDK,	http://java.sun.com
+  Apache Ant	http://jakarta.apache.org/ant
+
+
+                                --x--
+
+* Java is a trademark of Sun Microsystems, Inc.
+

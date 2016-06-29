@@ -1,0 +1,17 @@
+. <habilidade>
+anote [+<mensagem>|-|limpe]
+aprenda [ profissao <profissao> | habilidade <habilidade> ]
+atalho <nome da sala>
+cace <personagem>
+dons
+fundos <personagem> <financas>
++habilidade <personagem> <habilidade> [<nivel>]
+-habilidade <personagem> <habilidade>
+habilidades [<personagem>]
++magia <personagem> <magia> 
+-magia <personagem> <magia>
+mestre [<mestre>]
+profissoes
++profissao <personagem> <profissao> [<nivel>]
+-profissao <personagem> <profissao>
+regiao <distancia> | <nome da sala>

@@ -1,0 +1,18 @@
+;
+; lab.aut
+;
+
+c 0 1 100 141  ; coloca Sasha (100) na respectiva loja (141)
+;d 1 50 1  100 ; dá uma faca (item 1) para a Sasha (criatura 100)
+
+c 0 2 110 110              ; guardiao (110) na sala 110
+x 1 110 guardiao_norte     ; gancho 'guardiao_norte' (0) anexado ao guardiao (110)
+
+c 0 2 110 110              ; guardiao (110) na sala 110
+x 1 110 guardiao_norte_sul ; gancho 'guardiao_norte_sul' (1) anexado ao guardiao (110)
+
+s 0 100 n f 
+
+c 0 1 120 131	; mestre jiu-jitsu (120) na sala 131
+c 0 1 130 132	; buda (130) na sala 132
+%

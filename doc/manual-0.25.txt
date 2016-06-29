@@ -1,0 +1,1231 @@
+                    JMUD - Java Multi-User Dungeon
+                           Versão 0.25 Alfa
+
+                               O Manual
+                                 por
+                         José Alexandre Nalon
+
+
+                      última revisão: 2000/03/01
+
+
+1. Introdução:
+--------------
+
+   O JMud (Java Multi-User Dungeon) é o primeiro MUD brasileiro
+   programado em Java. Essa linguagem permite que o programa seja
+   executado em qualquer plataforma sem virtualmente nenhuma
+   modificação, bastando apenas compilar o programa através do comando
+   adequado, e rodando o programa.
+
+   Este é um manual generalista do JMud. Aqui existem informações
+   sobre como compilar o programa, como executá-lo, como fazer as
+   configurações e como criar zonas, salas, objetos e personagens.
+
+
+2. Como compilar e rodar o JMud:
+--------------------------------
+
+   Este documento supõe que o ambiente Java disponível seja uma versão
+   recente do Sun JDK. Especificamente, as instruções aqui contidas
+   funcionam com o Sun JDK 1.1.7v3. Modificações nos procedimentos
+   aqui apresentados podem ser necessárias para outras versões.
+
+2.1. Sucintamente:
+------------------
+
+   Se o ambiente Java estiver devidamente instalado e configurado, os
+   comandos abaixo são suficientes para rodar o JMud.
+
+   UNIX
+   ----
+   Compilação: make
+   Execução:   make test
+
+   WINDOWS
+   -------
+   Compilação: wmake
+   Execução:   wmake run
+
+2.2. Preparação do ambiente:
+----------------------------
+
+   Antes de tentar compilar e executar o JMud, certifique-se de que
+   seu ambiente Java esteja instalado e operacional.
+
+   A Sun Microsystems disponibiliza um ambiente de desenvolvimento de
+   Java chamado Sun Java Development Kit (Sun JDK) para diversas
+   plataformas. Esse pacote inclui o compilador (javac) e o
+   interpretador (java), entre outras ferramentas. Note que o Sun JDK
+   é um produto comercial. Se você pretende utilizá-lo, certifique-se
+   de ler a licença de uso e aceitá-la antes de instalar o Sun JDK em
+   sua máquina.
+
+   O Sun JDK pode ser obtido a partir do site da Sun, em:
+
+      http://java.sun.com
+
+   A instalação do ambiente Java para diversas plataformas foge ao
+   escopo deste documento. Em geral, consiste em simplesmente
+   desempacotar a distribuição e acertar a variável de ambiente
+   CLASSPATH.
+
+2.3. Compilação:
+----------------
+
+   UNIX
+   ----
+
+   A forma indicada para compilar o JMud é a seguinte:
+
+      make build
+
+   Esse comando compilará o JMud e depositará o resultado no
+   subdiretório "classes". Feito isso, o JMud estará pronto para
+   execução ou geração de um arquivo JAR.
+
+   Se for necessário invocar o compilador manualmente, a linha de
+   comando apropriada ficaria parecida com a seguinte:
+
+      javac -d classes src/JMud.java
+
+   Onde "classes" é o subdiretório onde o código gerado pelo
+   compilador será depositado.
+
+   WINDOWS
+   -------
+
+   Use o seguinte arquivo de lote para compilar o JMud:
+
+      wmake build
+
+   Executando o arquivo .BAT acima, o JMud será compilado e as classes
+   geradas ficarão no subdiretório "classes".
+
+   Também será criada a estrutura de diretórios de recursos do
+   JMud. Isso é necessário porque alguns descompactadores de arquivos
+   podem não restaurar corretamente aquela árvore de diretórios.
+
+   Para compilar manualmente, use o comando:
+
+      javac -d classes src\JMud.java
+
+2.4. Execução:
+--------------
+
+   UNIX
+   ----
+
+   O modo recomendado para a execução do JMud é apresentado a seguir:
+
+      make test
+
+   Essencialmente, o comando acima acrescentará a localização da
+   biblioteca de runtime do Java CUP à variável CLASSPATH e então
+   executará o seguinte comando:
+
+      java src.JMud
+
+   WINDOWS
+   -------
+
+   Para executar o JMud, pode-se usar o seguinte arquivo de lote:
+
+      wmake run
+
+   Essencialmente, o comando acima acrescentará a localização da
+   biblioteca de runtime do Java CUP e o subdiretório classes à variável
+   CLASSPATH e então executará o seguinte comando:
+
+      java src.JMud
+
+2.5. Geração de JAR:
+--------------------
+
+   UNIX
+   ----
+
+   2.5.1. Geração
+   --------------
+
+   A seguinte linha de comando automatiza o processo para se produzir
+   um arquivo "jmud.jar" contendo o JAR do JMud:
+
+      make jar
+ 
+   O comando acima terminará por executar a seguinte seqüência de
+   operações:
+
+      cd classes
+      jar cvf jmud.jar src
+      cd ..
+
+   2.5.2. Invocação
+   ----------------
+
+   Para invocar o JAR produzido no item anterior com o JRE (Java
+   Runtime Environment), pode-se usar o comando abaixo:
+
+      make runjar
+
+   Para fazer manualmente, o comando é o seguinte:
+
+      jre -cp jmud.jar src.JMud
+
+   WINDOWS
+   -------
+
+   2.5.3. Geração
+   --------------
+
+   A seguinte linha de comando automatiza o processo para se produzir
+   um arquivo "jmud.jar" contendo o JAR do JMud:
+
+      wmake jar
+
+   2.5.2. Invocação
+   ----------------
+
+   Para invocar o JAR produzido no item anterior com o JRE (Java
+   Runtime Environment), pode-se usar o comando abaixo:
+
+      wmake runjar
+
+   Ou nas versões mais novas do JDK:
+
+      java -jar jmud.jar
+
+3. Configuração:
+----------------
+
+   O JMud é configurado através de um arquivo de configuração,
+   tipicamente chamado 'jmud.cfg'. Outro nome de arquivo pode-se ser
+   especificado através da opção "-c" de linha de comando.
+
+   Exemplo:
+
+   java src.JMud -c configuracao.txt
+
+   Basicamente, a configuração consiste em atribuir valores a
+   variáveis, seguindo a sintaxe abaixo:
+
+   <nome da variavel> <valor>
+ 
+   Por exemplo:
+ 
+    DiretorioDeMundo        rec/mun/
+    ArquivoDeMundo          minimo.mun
+
+   Há mais algumas coisas que devem ser notadas.
+
+   Nomes de diretórios sempre terminam com uma barra (/) e
+   nomes de arquivos não. Veja o exemplo acima.
+
+   O caractere ponto-e-vírgula (;) é utilizado para comentários.  O
+   configurador do JMud ignorará tudo que estiver entre um
+   ponto-e-vírgula e o final da linha.
+
+   O caracter de porcentagem (%) indica o final do arquivo.
+
+   O arquivo de configuração pode ser modificado com um editor de
+   textos comum.
+
+ 3.1. Variáveis de Configuração:
+ -------------------------------
+
+   As variáveis descritas abaixo são as que permitem configurar o
+   JMud.
+
+   ZonaInicial             <numero da zona>
+
+     Consiste na zona em que o personagem aparecerá quando entrar pela
+     primeira vez no ambiente.
+   
+   SalaInicial             <numero da sala>
+
+     Consiste na sala em que o personagem aparecerá quando entrar pela
+     primeira vez no ambiente.
+
+   DiretorioDeMundo        <diretório de mundo>
+
+     Consiste no diretório onde os arquivos de mundo, zona, salas,
+     objetos, mobs, etc. serão encontrados.
+
+   ArquivoDeMundo          <arquivo de mundo>
+
+     Consiste no arquivo que contém as informações do mundo que cria a
+     ambientação do JMud. Veja maiores informações sobre criação de
+     mundos abaixo.
+ 
+   ArquivoDeAjuda          <arquivo de ajuda>
+
+     Consiste no arquivo que contém as informações de ajuda sobre
+     comandos.
+
+   ArquivoDeEstado         <arquivo de estado>
+
+     Consiste em um arquivo que guarda características persistentes da
+     execução do JMud, como horário interno, próximo identificador a
+     ser usado para jogadores, se o servidor aceita novos clientes,
+     entre outros. Maiores detalhes a serem adicionados em breve.
+
+   DiretorioDeUsuarios     <diretorio dos arquivos de usuarios>
+
+     Consiste no diretório onde o JMud armazenará e de onde o JMud
+     carregará as informações dos usuários. Não deve haver nesse
+     diretório nenhum arquivo que não seja os criados pelo JMud para
+     conter essas informações.
+
+   DiretorioDePosses       <diretório dos pertences dos usuarios>
+
+     Consiste no diretório onde o JMud armazenará e de onde o JMud
+     carregará as informações das posses dos usuários, ou seja, os
+     objetos que os personagens carregam. Não deve haver nesse
+     diretório nenhum arquivo que não seja os criados pelo JMud para
+     conter essas informações.
+
+   MaximoDeAbuso           <máximo de abuso>
+
+     Consiste na quantidade máxima de vezes que um comando pode ser
+     repetido por um mesmo usuário. Após essa quantidade, o JMud passa
+     a ignorar os comandos repetidos.  O objetivo desta opção é
+     dificultar que usuários utilizem comandos para fazer "spam".
+
+   ArquivoDeMensagemDoDia  <arquivo com a mensagem do dia>
+
+     Consiste no arquivo texto que conterá a mensagem a ser exibida
+     assim que o usuário acessa o JMud.
+
+
+4. Mecânica Básica do JMud:
+---------------------------
+
+4.1 Introdução:
+---------------
+
+  Esta seção apresenta os conceitos fundamentais que aparecem no
+  JMud. Como é o único lugar onde tais idéias aparecem explicitamente,
+  pode ser usada como fonte autoritária para referências. Qualquer
+  outro documento ou seção que apresente conflito com esta seção
+  deveria ser corrigido.
+
+4.2. Conceitos:
+---------------
+
+  Fundamentos
+  -----------
+
+  As idéias enumeradas a seguir são fundamentais ao sistema:
+
+  Personagem: 
+
+    O JMud é habitado por personagens. Os personagens controlados por
+    usuários são chamados 'Jogadores', enquanto que os controlados
+    pelo sistema são conhecidos como 'Criaturas'.
+
+  Item:
+
+    Itens representam objetos que ajudam a enriquecer o ambiente do
+    JMud. Eles têm variadas aplicações: alimento pode ser comido,
+    papel e lápis usados para escrever, vassoura utilizada para
+    limpeza, espada fornece vantagem em luta corporal, sacola armazena
+    outros itens, etc.
+
+  Sala:
+
+    A sala é a unidade básica de "lugar" do JMud. Todo personagem
+    encontra-se sempre em alguma sala. Um item pode estar ou em uma
+    sala, ou em posse de algum personagem, ou ainda, dentro de outro
+    item.
+
+  Idéias complementares
+  ---------------------
+
+  Conceitos auxiliares também estão presente:
+
+  Zona:
+
+    Uma zona delimita um conjunto estanque de entidades. Pense em uma
+    zona como um "pacote" contendo um ou mais cenários que juntos
+    compõem um ambiente do mundo do JMud.
+
+    Cada zona descreve suas próprias criaturas, itens e salas. 
+
+  Mundo:
+
+    Mundo designa um banco de dados completo, representado em termos
+    de uma coleção de zonas. É único em uma dada instância em execução
+    do JMud.
+
+4.3. Projeto do JMud:
+---------------------
+
+Funcionamento geral
+- modelo cliente/servidor
+- threads
+
+Identificadores
+
+  Uma zona reserva um espaço de endereçamento de entidades através
+  dos atributos 'base' e 'faixa'. 'base' é o início do espaço de
+  endereçamento alocado pela zona. 'faixa' é o número de endereços
+  alocado pela zona.
+
+  Uma zona que tenha base 'b' e faixa 'f' terá alocado o seguinte
+  intervalo de endereços: [b, b + f - 1]. Se, por exemplo, a zona
+  tiver base 1000 e faixa 500, seus identificadores poderão variar
+  entre 1000 e 1499, inclusive.
+
+Sistema de atributos
+
+Mecanismo de luta
+
+
+5. Criação de Mundos:
+---------------------
+
+   Os mundos são criados de maneira hierárquica, através de arquivos
+   contendo as informações necessárias. Cada arquivo contém um
+   determinado número de campos que descrevem o ambiente. Os arquivos
+   básicos estão listados a seguir:
+
+   Arquivos de Mundo:
+   Extensão sugerida: *.mun
+
+     Um 'mundo' consiste na junção de todas as informações que compõem
+     o ambiente no qual os personagens do JMud interagem, como
+     'zonas', 'objetos', 'personagens', 'criaturas', etc.
+
+   Arquivo de Zonas:
+   Extensão sugerida: *.zon
+
+     Uma 'zona' consiste em um conjunto de 'salas', 'objetos' e 
+     'personagens' (incluindo mobs). A junção de várias zonas permite 
+     criar um mundo mais complexo e completo.
+
+   Arquivo de Salas:
+   Extensão sugerida: *.sal
+
+     Uma 'sala' é a menor parte do ambiente que compõe o mundo. Salas
+     contém a descrição do que está ao redor do personagem, bem como
+     os objetos nela presente. Em geral, personagens em uma mesma sala
+     podem ver uns aos outros e interagir; personagens em salas
+     diferentes não.
+
+   Arquivo de Criaturas:
+   Extensão sugerida: *.cri
+
+     Uma 'criatura' (também chamado de 'mob') é um personagem
+     controlado pelo JMud, ao invés de controlado por um
+     usuário. Esses personagens, que podem ser desde reis ou policiais
+     até monstros e outras criaturas, compõem a população do mundo.
+
+   Arquivo de Itens:
+   Extensão sugerida: *.ite
+
+     Um 'item' é um objeto com alguma função específica que faz parte
+     do ambiente do mundo. Armas, armaduras, sacolas, fontes,
+     vassouras, escudos, tudo isso é definido como sendo itens.
+
+   Arquivo de Loja:
+   Extensão sugerida: *.loj
+
+     Loja é o mecanismo através do qual itens são comercializados.
+     Usando uma loja é possível ao personagem comprar e vender
+     itens. Arquivos deste tipo definem as criaturas que têm a função
+     de 'vendedores' de cada loja.
+
+   Arquivo de Automação:
+   Extensão sugerida: *.aut
+ 
+     Consiste em uma lista de comandos que é executada a um
+     determinado intervalo de tempo que re-organiza o ambiente do
+     JMud.
+
+   Nas seções que se seguem daremos informações mais detalhadas sobre
+   esses arquivos.
+
+   Observação: o JMud estará em breve adotando uma nova sintaxe, mais
+   intuitiva e menos dúbia para os arquivos de dados. Assim que o
+   parser para a nova sintaxe estiver pronto, maiores detalhes serão
+   incluídos neste manual. No entanto, as seções seguintes continuarão
+   existindo por questões de compatibilidade com versões
+   anteriores. Haverá um utilitário simples para converter os arquivos
+   de dados antigos para a nova sintaxe.
+
+ 5.1. Arquivo de Mundos:
+ -----------------------
+
+   Um arquivo de mundo contém a seguinte sintaxe:
+
+    #mmm
+    <título do mundo>
+    <zona1.zon>     [<dir1>]
+    <zona2.zon>     [<dir2>]
+    ...
+    <zonaN.zon>     [<dirN>]
+    $
+    n|s|l|o|c|b <zona origem> <sala origem> <zona destino> <sala destino>
+    ...
+    %
+
+   O arquivo de mundo é dividido em duas partes. A primeira parte, do
+   início do arquivo até o caractere cifrão ($) contém a descrição
+   básica do mundo, dada pelas zonas que fazem parte dele. A segunda
+   parte do arquivo, do caracter cifrão ($) até o fim do arquivo,
+   contém as informações de ligações das zonas.
+
+   #mmm
+
+     Esse campo consiste no número do mundo. Esse número é totalmente
+     arbitrário, e não tem efeito no jogo.
+
+   <título do mundo>
+
+     Consiste no nome do mundo. Esse nome aparecerá como título nos
+     clientes.
+
+   <zonaN.zon>  [<dirN>]
+
+     Os próximos campos são uma seqüência de zonas que devem ser
+     incluídas no ambiente. Aqui devem ser listados todos os arquivos
+     de zonas a serem incluídos (determinados pelos nomes
+     <zonaN.zon>).
+     
+     <dirN> é o diretório onde o arquivo <zonaN.zon> se encontra, bem
+     como os outros arquivos que a descrevem, como arquivos de
+     criaturas (*.cri), itens (*.ite), etc. O parametro <dirN> é
+     opcional.
+
+   n|s|l|o|c|b <zona origem> <sala origem> <zona destino> <sala destino>
+
+     Esses campos determinam as ligações entre as zonas. Essas
+     ligações são feitas determinando quais salas se interligam, e
+     qual a direção dessa ligação.
+
+     Por exemplo, a linha:
+
+       l 0 1   1 2
+
+     indica que a sala 1 da zona 0 se liga à sala 2 da zona 1 pelo
+     leste. Isso significa que, se o personagem estiver na sala 1 da
+     zona 0 e for para o leste, ele atingirá a sala 2 da zona 1.
+
+   O arquivo de mundos é terminado por um caracter de porcentagem
+   (%). Veja maiores informações nas seções sobre zonas e salas.
+
+ 5.2. Arquivo de Zona:
+ ---------------------
+
+   Um arquivo de zona contém a seguinte sintaxe:
+
+    #zzz
+    <título da zona>
+    <nome da zona>
+    <base> <faixa> <período para automação>
+    ;
+    ; A partir daqui pode haver comentários e
+    ; linhas em branco.
+    ;
+
+    s <salas.sal>
+    i <itens.ite>
+    c <criaturas.cri>
+    a <automações.aut>
+    l <lojas.loj>
+    %
+
+   É importante notar que os primeiros campos desse arquivo não podem
+   ser precedidos de comentários, ou seja, caractere ponto-e-vírgula
+   (;).
+
+   #zzz
+
+     Consiste no número da zona. Esse número é extremamente importante
+     para o JMud, pois é a identificação da zona para todo e qualquer
+     comando. Zonas não podem ter números repetidos.
+
+   <título da zona>
+
+     Consiste no nome externo da zona. Ou seja, clientes que queiram
+     utilizar o nome da zona devem se valer dessa informação.
+
+   <nome da zona>
+
+     Consiste no nome interno da zona. Ou seja, é a forma como o JMud
+     buscará essa zona em seus arquivos caso algum comando a
+     referencie pelo nome. Esse nome deve ser único e conter apenas
+     uma palavra, pois é usado como chave.
+
+   <base> <faixa> <período para automação>
+
+     <base> é um inteiro que representa o ID básico da zona, ou seja,
+     o valor inicial das salas, criaturas, itens e todos os dados
+     referentes àquela zona. O id de qualquer dado referente a uma
+     zona é dado pela soma da <base> com o ID da sala, item ou
+     criatura pertencente a ela. Maiores informações no capítulo 4 -
+     Mecânica básica do JMud.
+
+     <faixa> é o intervalo máximo permitido para os ids pertencentes
+     àquela zona. Em outras palavras, os ids daquela zona estarão
+     sempre entre <base> e <base>+<faixa>. Maiores informações no
+     capítulo 4 - Mecânica básica do JMud.
+     
+     <período> é o tempo em minutos entre a execução da respectiva
+     automação.
+
+   Logo após esses campos, o arquivo de zona poderá ter comentários.
+   Os campos a seguir são comandos para o carregamento de dados de
+   outros arquivos. Eles podem aparecer em qualquer ordem.
+
+   s <salas.sal>
+
+     Comando para carregar o arquivo das salas que compõem a
+     zona. Veja maiores informações nos arquivos de salas, logo
+     abaixo.
+
+   i <itens.ite>
+
+     Comando para carregar o arquivo de itens que fazem parte da
+     zona. Veja maiores informações nos arquivos de itens, logo
+     abaixo.
+
+   c <criaturas.cri>
+
+     Comando para carregar o arquivo de criaturas que fazem parte da
+     zona. Veja maiores informações nos arquivos de itens, logo
+     abaixo.
+
+   a <automações.aut>
+  
+     Comando para carregar as informações sobre a automação da
+     zona. Veja maiores informações nos arquivos de zonas, logo
+     abaixo.
+
+   l <lojas.loj>
+   
+     Comando para carregar as informações sobre lojas que fazem parte
+     da zona. Veja maiores informações nos arquivos de lojas, logo
+     abaixo.
+
+   O arquivo de zona é terminado com um caracter de porcentagem (%).
+
+ 5.3. Arquivo de Salas:
+ ----------------------
+
+   O arquivo de salas contém a descrição de várias salas. A descrição
+   de cada sala é separada das demais pelo caractere cifrão ($). O
+   arquivo segue a seguinte sintaxe:
+ 
+    <descrição sala>
+    $
+    <descrição sala>
+    $
+    ...
+    <descrição sala>
+    $
+    %
+
+   A descrição da sala é dada por:
+
+    #sss
+    <título da sala>
+    <sin1> ... <sinN> | -
+    Descrição, linha 1
+    ...
+    Descrição, linha N
+    ~
+    <propriedades>
+    n|s|l|o|c|b <sss> [<propriedades>]
+    ...
+    n|s|l|o|c|b <sss> [<propriedades>]
+
+   Descrevemos em seguida o significado de cada campo.
+
+   #sss
+
+     Consiste no número da sala. Esse número é extremamente importante
+     para a correta identificação da sala pelo JMud. A numeração
+     correta das salas é dada pelo parâmetro <faixa> no arquivo de
+     zonas. Veja o capítulo 4 - Mecânica Básica do JMud, e a seção 5.2
+     - Arquivos de Zonas para maiores informações.
+
+   <título da sala>
+
+     Este é o título da sala. Esse nome será utilizado pelo cliente
+     para identificar para o usuário a sala onde ele se encontra.
+
+   <sin1>...<sinN> | -
+
+     Esta é uma lista de sinônimos para o título da sala.  Esses nomes
+     são úteis para que o usuário faça uma referência rápida à sala,
+     pelo seu elemento mais marcante, ou por nomes mais curtos,
+     etc. Caso não se deseje nenhum sinônimo, esta linha deve conter
+     um caractere traço (-).
+
+   <descrição>
+
+     As linhas seguintes contém a descrição da sala, que serão
+     mostradas ao usuário quando ele entrar na sala, ou usar o comando
+     'olhe'. A descrição ocupa várias linhas. Ao fim da descrição,
+     deve-se utilizar o caractere til (~) no início de uma linha vazia
+     para identificar o seu fim.
+
+   <propriedades>
+
+     Consiste na identificação das diversas propriedades da sala. Caso
+     a sala não tenha nenhuma propriedade específica, esse campo
+     deverá conter um caractere traço (-).
+
+     As propriedades possíveis das salas são:
+
+     a - P_OPEN, especifica que a sala é aberta e pode ser acessada
+     sem o uso de uma chave. O default é fechada.
+
+   n|s|l|o|c|b <sss> [<propriedades>]
+
+     As linhas seguintes identificam as ligações da sala com outras
+     salas. Cada linha identifica uma ligação com uma sala diferente,
+     dando a direção da ligação, a sala a qual se conecta, e as
+     propriedades dessa ligação.
+
+     As propriedades são expressas como uma seqüência de
+     caracteres. Os caracteres correspondentes a cada uma de suas
+     propriedades são os seguintes:
+
+     a - P_CLOSEABLE, a ligação consiste em uma porta
+       que pode ser aberta ou fechada.
+     b - P_LOCKABLE, a ligação consiste em uma porta
+       que pode ser trancada.
+     c - P_HIDDEN, a ligação está escondida e normalmente
+       não pode ser vista por um jogador.
+  
+     Por exemplo, a linha:
+
+       n 2 ab
+
+     indica que a sala atual se conecta à sala 2 pelo norte,
+     e que é uma porta que pode ser fechada e trancada.
+
+  A separação entre as informações das diversas salas é feita com o
+  caractere cifrão ($). Em outras palavras, após as informações de
+  cada sala esse caractere deve ser incluído para indicar o fim das
+  informações.
+
+  O caractere de porcentagem (%) indica o fim do arquivo.
+
+ 5.4. Arquivo de Criaturas:
+ --------------------------
+
+  O arquivo de criaturas contém a descrição de várias criaturas,
+  separadas pelo caractere cifrão ($). Para uma melhor compreensão do
+  formato do arquivo de criaturas, sugerimos ler a seção 4 sobre a
+  mecânica básica do JMud. A sintaxe do arquivo segue:
+
+   <descrição criatura>
+   $
+   <descrição criatura>
+   $
+   ...
+   <descrição criatura>
+   $
+   %
+
+  A descrição da criatura é dada por:
+
+   #ccc
+   <espécie da criatura>
+   <nome da criatura>
+   <sin1> ... <sinN>
+   <linha de descrição breve>
+   <descrição1>
+   ...
+   <descriçãoN>
+   ~
+   <nivel> <sexo> <propriedades> 
+   <experiencia> 
+   <bondade> <maldade>
+   <ouro> po <prata> pp <bronze> pb <cravos> cr
+   <gancho_1> ... <gancho_N> | -
+   <definição de atributos>
+   $
+   <ajuste de atributos>
+
+  Descrevemos agora cada campo:
+
+  #ccc
+
+    Consiste no número da criatura. Esse número serve como
+    identificação para o JMud, e é importante que não existam duas
+    criaturas diferentes com o mesmo número.
+
+  <espécie da criatura>
+
+    Este número especifica a espécie da criatura. Ainda não tem uma
+    função prática, mas terá em breve. Os valores possíveis são:
+
+    0 - T_HUMAN, a criatura é humana.
+    1 - T_BEAST, a criatura não é humana (por exemplo, um cachorro).
+
+  <nome da criatura>
+
+    Consiste no nome da criatura, que será usado pelo JMud para
+    descrições breves. Deve ser antecedido de um artigo indefinido, se
+    for uma criatura genérica (por exemplo, "um policial"), ou ser
+    precedido de um artigo definido ou nenhum artigo, se for único
+    (por exemplo, "o guarda Belo").
+
+  <sin1>...<sinN>
+
+    Consiste em uma lista de sinônimos para aquela criatura.  Em
+    outras palavras, uma lista de nomes pelos quais o usuário poderá
+    fazer referência àquela criatura. Deve existir pelo menos um
+    sinônimo, que será a forma como os jogadores se referenciarão à
+    criatura.
+
+  <linha de descrição breve>
+
+    Consiste em uma linha de descrição que será exibida pelo JMud para
+    o usuário quando o mesmo encontrar a criatura em uma sala, ou toda
+    vez que o usuário olhar para a sala.
+
+  <descrição>
+
+    Consiste em uma descrição longa da criatura que será exibida pelo
+    JMud ao usuário quando este usar o comando 'olhe'. A descrição
+    longa é terminada com um caractere til (~) no início de uma linha
+    vazia.
+
+  <nivel> <sexo> <propriedades> 
+
+    Esta linha contém várias definições curtas sobre a criatura.
+
+    Nível refere-se ao nível da criatura, sendo um número inteiro
+    dentro dos limites permitidos para o nível. Valores permitidos são
+    inteiros positivos "não muito grandes" (atualmente, não muito
+    maiores do que 10, até que isso seja perfeitamente definido).
+
+    Sexo refere-se ao sexo da criatura, e é importante para que o JMud
+    faça a concordância correta. É um valor numérico. Os sexos
+    possíveis são:
+
+    0 - S_NEUTRAL, a criatura não tem sexo, ou o conceito
+      não se aplica a ela.
+    1 - S_MALE, a criatura é do sexo masculino.
+    2 - S_FEMALE  (2): a criatura é do sexo feminino, e portanto
+      incompreensível para as mentes terrestres.
+
+    Propriedades são campos de bits com características relevantes da
+    criatura. As propriedades da criatura são:
+
+    bit 0: P_WALKER, indica se a criatura anda pelo ambiente
+      ou permanece em uma mesma sala.
+
+  <experiencia> 
+
+    Indica a quantidade de pontos de experiência possuídos pela
+    criatura.
+
+  <bondade> <maldade>
+
+    Representa a quantidade de pontos de bondade e maldade que a
+    criatura possui. Esses valores expressam uma idéia do
+    comportamento moral da criatura.
+
+  <ouro> po <prata> pp <bronze> pb <cravos> cr
+
+    Indica a quantidade de tesouro, em moedas de prata, bronze ou
+    cravos, que a criatura carrega consigo, e podem ser recolhidas
+    pelo personagem após a morte da criatura.
+
+  <gancho_1> ... <gancho_N> | -
+
+    Ganchos são comportamentos especiais de cada uma das
+    criaturas. Quando uma criatura tem um gancho especificado, todas
+    as criaturas desse tipo terão esse comportamento.  O gancho pode
+    ser colocado na automação, mas nesse caso, apenas uma criatura
+    específica ganha o comportamento.  Veja as seções 5.2. Arquivos de
+    Zona e 5.7. Arquivos de Automação para maiores detalhes. Os
+    ganchos disponíveis são:
+
+      guardiao_norte - bloqueia a saida norte.
+      guardiao_sul - bloqueia a saida sul.
+      guardiao_norte_sul - bloqueia a saida norte e a saida sul.
+      guardiao_cima - bloqueia a saida para cima.
+      agressivo - ataca quem entra na sala.
+
+  <definição de atributos>
+
+    Para uma melhor compreensão deste campo, é necessário ler o
+    capítulo 4 - mecânica básica do JMud.
+
+    Este campo consiste na verdade em uma lista de comandos que
+    atribui valores aos atributos de uma criatura. Os comandos são os
+    seguintes:
+
+    t <valor> - dá a todos os atributos o mesmo valor.
+
+    a <atributo> <valor> - dá ao atributo o valor indicado.  Veja o
+    capítulo 4 para a lista dos atributos e seus respectivos valores
+    numéricos para o JMud.
+
+    l <linha> <valor> - dá a todos os atributos de uma linha o mesmo
+    valor.
+
+    c <coluna> <valor> - dá a todos os atributos de uma coluna o mesmo
+    valor.
+
+    fis <sentidos> <destreza> <força> <corpo> <vigor> - dá aos
+    atributos físicos os valores correspondentes, respectivamente.
+
+    men <prontidão> <raciocínio> <inteligência> <mente> <vontade> - dá
+    aos atributos mentais os valores correspondentes, respectivamente.
+
+    mis <atenção> <fantasma> <aura> <espírito> <alma> - dá aos
+    atributos místicos os valores correspondentes, respectivamente.
+
+    soc <malícia> <manipulação> <carisma> <aparência> <confiança> - dá
+    aos atributos sociais os valores correspondentes, respectivamente.
+
+    per <sentidos> <prontidão> <atenção> <malícia> - dá aos atributos
+    perceptivos os valores correspondentes, respectivamente.
+
+    agi <destreza> <raciocínio> <fantasma> <manipulação> - dá aos
+    atributos de agilidade os valores correspondentes,
+    respectivamente.
+
+    aca <força> <inteligência> <aura> <carisma> - dá aos atributos de
+    ação e exerção os valores correspondentes, respectivamente.
+
+    res <corpo> <mente> <espírito> <aparência> - dá aos atributos de
+    resistência os valores correspondentes, respectivamente.
+
+    vit <vigor> <vontade> <alma> <confiança> - dá aos atributos de
+    vitalidade os valores correspondentes, respectivamente.
+
+  <ajuste aleatório de atributos>
+
+    Esse campo consiste em uma lista de comandos que ajustam atributos
+    aleatoriamente para cima ou para baixo. Os possíveis comandos são:
+
+    t <valor> [+|-] - ajusta todos os atributos pelo valor dado.
+
+    a <atributo> <valor> [+|-] - ajusta o atributo dado pelo valor
+    correspondente. Veja o capítulo 4 para uma lista dos possíveis
+    atributos e seus respectivos valores numéricos para o JMud.
+
+    l <linha> <valor> [+|-] - ajusta todos os atributos de uma linha
+    pelo valor correspondente.
+
+    c <coluna> <valor> [+|-] - ajusta todos os valores de uma coluna
+    pelo valor correspondente.
+
+  A separação entre as informações das diversas criaturas é feita com
+  o caractere cifrão ($). Em outras palavras, após as informações de
+  cada criatura esse caractere deve ser incluído para indicar o fim
+  das informações.
+
+  O caractere de porcentagem (%) indica o fim do arquivo.
+
+ 5.5 - Arquivo de Itens:
+ -----------------------
+
+  Assim como os arquivos de salas e de criaturas, os arquivos de itens
+  contêm a descrição de diversos itens, separados pelo caractere
+  cifrão ($). A sintaxe é a seguinte:
+
+   <descrição item>
+   $
+   <descrição item>
+   $
+   ...
+   <descrição item>
+   $
+   %
+
+  Cada item é descrito pelos seguintes campos:
+
+   #iii
+   <categoria do item>
+   <nome do item>
+   <sin1> ... <sinN>
+   <linha de descrição breve>
+   <descrição1>
+   ...
+   <descriçãoN>
+   ~
+   <nivel> <carga> <valor> <propriedades> <onde>
+   <campos variáveis segundo a categoria>
+
+  Descrevemos a seguir os campos:
+
+  #iii  
+
+    Consiste no identificador do item. Assim como os outros
+    identificadores, ele é utilizado pelo JMud para referenciar
+    internamente o objeto, e portanto não deve ser duplicado.
+
+  <categoria do item>
+
+    Indica de qual tipo é esse objeto. Esse é um campo numérico que
+    pode ter os seguintes valores:
+
+    0 - T_NONE, não existe uma categoria definida para esse
+      item.
+    1 - T_WEAPON, o item é uma arma.
+    2 - T_ARMOR, o item é uma armadura.
+    3 - T_CONTAINER, o item é um tipo de objeto que pode
+      conter outros objetos, como uma sacola ou uma mochila,
+      por exemplo.
+    4 - T_BOARD, o item é um quadro de avisos, onde se
+      pode escrever mensagens.
+    5 - T_KEY, o item é uma chave, que pode abrir uma
+      determinada porta.
+    6 - T_CURRENCY, o item é um tipo de moeda.
+
+  <nome do item>
+
+    Consiste no nome do item. Este nome é puramente cosmético. A
+    referência ao objeto é dada pela lista de sinônimos.
+
+  <sin1> ... <sinN>
+
+    Consiste em uma lista de sinônimos para o objeto. Qualquer dos
+    nomes utilizados nesta lista fará referência ao mesmo objeto.
+
+  <linha de descrição breve>
+
+    Breve linha de descrição do objeto, exibida pelo JMud para o
+    personagem quando ele vê o objeto em uma sala.
+
+  <descrição>
+
+    Descrição extensa do objeto, exibida pelo JMud quando o usuário
+    utiliza o comando 'olhe'. Essa descrição pode conter várias
+    linhas, e deve ser terminada pelo caracter til (~) no início de
+    uma linha vazia.
+
+  <nivel> <carga> <valor> <propriedades> <onde>
+
+    Esta linha contém várias informações sobre o item.
+
+    Nível refere-se a uma estimativa do poder do objeto.  Por
+    enquanto, o nível é puramente arbitrário, mas terá significado
+    futuramente.
+
+    Carga indica o peso do objeto, e deve estar dentro dos
+    limites. Veja o capítulo 4, mecânica básica do JMud para melhores
+    informações.
+
+    Valor indica o preço do item. Esse é o preço básico do item, mas
+    circunstâncias dentro do jogo podem fazer com que ele seja
+    apresentado diferentemente.
+
+    Propriedades indicam características próprias do item. São
+    descritas como seqüências de caracteres que indicam a presença ou
+    não da propriedade. São diversas as propriedades, que seguem:
+
+      a - P_CANTAKE, o item pode ser apanhado por um
+        personagem. Certos itens não devem ser carregados por
+        aí, o valor correto dessa propriedade indica isso.
+      b - P_WEARALL, 
+      c - P_INVISIBLE, o item é invisível, e não pode
+        ser visto pelo jogador por meios normais.
+      d - P_GLOWING, o item emite uma luminosidade.
+      e - P_HUMMING, o item emite um som baixo.
+      f - P_PHYSICAL,
+      g - P_MENTAL, 
+      h - P_MYSTIC,
+      i - P_VOLATILE, o item não pode ser salvo, ou seja,
+        não será salvo como parte dos pertences do personagem.
+      j - P_STATIC, o item não pode ser modificado.
+
+    Onde indica em que parte do corpo o objeto é usado, caso esse dado
+    se aplique. As partes do corpo são definidas por seqüências de
+    caracteres, conforme descrito a seguir:
+
+      a - W_LHOLD, seguro na mão esquerda.
+      b - W_RHOLD, seguro na mão direita.
+      c - W_HEAD, na cabeça.
+      d - W_NECK, no pescoço.
+      e - W_BODY, no tronco.
+      f - W_WAIST, na cintura.
+      g - W_AROUND, sobre o corpo (eg. uma capa).
+      h - W_LSHOULDER, no ombro esquerdo.
+      i - W_RSHOULDER, no ombro direito.
+      j - W_LARM, no braço esquerdo.
+      k - W_RARM, no braço direito.
+      l - W_LWRIST, no pulso esquerdo.
+      m - W_RWRIST, no pulso direito.
+      n - W_LHAND, na mão esquerda.
+      o - W_RHAND, na mão direita.
+      p - W_LFINGER, em um dedo na mão esquerda.
+      q - W_RFINGER, em um dedo na mão direita.
+      r - W_LLEG, na perna esquerda.
+      s - W_RLEG, na perna direita.
+      t - W_LFOOT, no pé esquerdo.
+      u - W_RFOOT, no pé direito.
+
+  <campos variáveis segundo a categoria>
+
+    Dependendo do tipo do item, os campos seguintes são
+    variáveis. Esta linha de campos têm as seguintes definições:
+
+     Tipo do Item    Campos
+     arma            <físico> <mental> <espiritual> <tipo de dano>
+     armadura        <físico> <mental> <espiritual>
+     recipiente      <capacidade>
+     quadro          <sistema de quadros>
+     chave           <sala> <direcao>
+                     ...
+                     $
+     moeda           <tipo> <valor>
+
+    Arma
+    <físico> <mental> <espiritual> <tipo de dano>
+
+     <físico> refere-se ao atributo físico da arma.
+     <mental> refere-se ao atributo mental da arma.
+     <espiritual> refere-se ao atributo espiritual da arma.
+     <tipo de dano> é o tipo de dano que a arma produz.
+
+    Armadura
+    <físico> <mental> <espiritual>
+
+     <físico> refere-se ao atributo físico da armadura.
+     <mental> refere-se ao atributo mental da armadura.
+     <espiritual> refere-se ao atributo espiritual da armadura.
+
+    Recipiente
+    <capacidade>
+
+     <capacidade> refere-se à quantidade de peso que o item pode
+     carregar dentro de si. A carga em um recipiente é a soma dos
+     valores do campo <carga> dos objetos nele contidos.
+
+    Quadro
+    <sistema de quadros>
+
+     <sistema de quadros> refere-se a qual sistema de quadros o quadro
+     pertence. Diferentes sistemas de quadros têm propriedades
+     distintas. As propriedade mais perceptíveis dizem respeito a quem
+     pode acessar o quadro para leitura, escrita ou administração de
+     conteúdo. Todos os quadros do mesmo sistema permanecem
+     sincronizados, o que significa que apresentam as mesmas
+     mensagens. Os valores possíveis são:
+
+      0 - B_ADMIN, apenas administradores, implementadores e
+        moderadores podem acessar esse quadro, que deve ser
+        usado para fins administrativos apenas.
+      1 - B_IMMORTAL, apenas imortais podem acessar esse quadro.
+      2 - B_SOCIAL, todos os personagens podem acessar esse quadro.
+
+    Chave
+    <sala> <direcao>
+    ...
+    $
+
+      O conjunto <sala> <direção> refere-se à porta que a chave
+      abre. Ou seja, a chave é adequada para a sala indicada, na
+      direção especificada.
+
+      Uma chave pode abrir mais de uma porta. Portanto, as informações
+      são dadas na forma de uma lista, terminada pelo caracter cifrão
+      ($).
+
+    Moeda
+    <tipo> <valor>
+
+      Um item 'moeda' é encarado como sendo uma pilha de moedas.  As
+      informações contém, portanto, o tipo de moedas da pilha e a
+      quantidade de moedas.
+
+      <tipo> refere-se ao tipo da moeda.
+      <valor> é a quantidade de moedas que existe.
+
+ 5.6. Arquivo de Lojas:
+ ----------------------
+
+  Esta seção está incompleta. Maiores informações serão incluídas em
+  breve.
+
+ 5.7. Arquivo de Automações:
+ ---------------------------
+
+  Esta seção está incompleta. Maiores informações serão incluídas em
+  breve.
+
+ 5.8. Arquivo de Ajuda:
+ ----------------------
+
+  O arquivo de ajuda consiste em uma lista de tópicos com suas
+  respectivas descrições. A definição de cada tópico é separada das
+  demais pelo caractere cifrão ($). A sintaxe é a seguinte:
+
+   <definição ajuda>
+   $
+   <definição ajuda>
+   $
+   ...
+   <definição ajuda>
+   $
+   %
+
+  A sintaxe para cada definição segue abaixo:
+
+   #<sin1> ... <sinN>
+   <Texto de ajuda>
+
+  As linhas da definição de ajuda são:
+
+   #<sin1> ... <sinN>
+
+    Este campo refere-se a todos os sinônimos da palavra buscada.
+    Quando qualquer um desses sinônimos for especificado no comando de
+    ajuda, o texto que se segue será exibido.
+
+   <Texto de ajuda>
+
+    Consiste no texto que será exibido para o usuário quando o comando
+    de ajuda for utilizado. O texto pode ocupar várias linhas.
+
+
+ 5.9. Arquivos de Usuários:
+ --------------------------
+
+  Esta seção está incompleta. Maiores informações serão incluídas em
+  breve.
+
+
+6. Nova Sintaxe:
+----------------
+
+  Esta seção conterá a definição da nova sintaxe, que estará pronta em
+  breve. Abaixo, segue a definição BNF da nova sintaxe, para os que
+  podem compreendê-la terem uma breve visão do que está por vir.
+  Sinais terminais estão sem marcações especiais, não terminais estão
+  cercados por < >, a barra vertical (|) significa 'ou'. A análise
+  começa por <enum>:
+
+  <enum> ::= ( ) |
+             ( <enum_list> )
+
+  <enum_list> ::= <rvalue> |
+                  <enum_list> ; <rvalue>
+
+  <rvalue> ::= <lvalue> |
+               <map> |
+               <enum>
+
+  <lvalue> ::= <identificador> |
+               <string> |
+               <número>
+
+  <map> ::= ( ) |
+            ( <map_list> )
+
+  <map_list> ::= <map_item> |
+                 <map_list> ; <map_item>
+
+  <map_item> ::= <lvalue> = <rvalue>
+

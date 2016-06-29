@@ -1,0 +1,62 @@
+
+-------------------------------------
+CUIDADOS COM CONTROLE DE CONCORRENCIA
+-------------------------------------
+
+
+INTRODUCAO
+
+  O controle de concorrencia do JMud foi projetado de forma a ser
+  facilmente utilizado, desde que certos cuidados sejam tomados.
+  
+  No caso geral, durante o jogo, apenas a (unica) thread do Interpreter
+  acessa as informacoes dos clientes (classe Client e demais classes
+  referenciadas por essa). Um cliente nessa situacao encontra-se na
+  lista playingClients.
+  
+  Entretanto, quando um personagem esta entrando no sistema, apenas a
+  classe Client desse personagem pode acessar as informacoes do
+  mesmo. Um cliente nessa situacao fica na lista incomingClients.
+  
+  Ao final do processo de identificacao, o personagem e' chaveado de
+  incomingClients para playingClients.
+
+
+QUANDO ESCREVER METODOS QUE ACESSAM ESTRUTURAS DE DADOS DOS CLIENTES,
+TENHA EM MENTE QUE:
+
+  (1) Ha' apenas uma thread Interpreter.
+  (2) Os comandos da CommandTable sao executados pela thread 
+      Interpreter.
+  (3) Ha' varias threads Client, uma por jogador.
+  (4) Os metodos nos quais pode haver conflito entre Interpreter e
+      Client devem ser protegidos por metodos synchronized.
+  (5) Um metodo acessado tanto por Client quanto por Interpreter
+      nao precisa ser protegido por synchronized se for
+      seguida a regra do proximo topico para coordenar
+      o acesso dessas threads.
+  
+
+A SEGUINTE TABELA DIZ QUANDO CADA THREAD PODE ACESSAR AS ESTRUTURAS DE
+DADOS DOS CLIENTES:
+
+		  | Client | Interpreter
+  --------------------------------------
+  incomingClients | SIM    | NAO
+  playingClients  | NAO    | SIM
+  
+  
+  Entao, qual thread pode acessar um cliente (Cliente) num dado
+  estado?
+  
+  Estado: incomingClients
+  
+  * Apenas a propria thread do cliente pode acessar as informacoes
+    da classe Client, incluindo as do Player correspondente.
+    A thread do Interpreter nao pode.
+  
+  Estado: playingClients
+  
+  * Apenas a thread do Interpreter pode acessar as informacoes das
+    instancias de Client. A respectiva thread do cliente nao pode.
+    (Nem qualquer outra).

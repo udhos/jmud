@@ -1,0 +1,29 @@
+#100
+Rua da Agonia
+rua agonia cidadela
+  O solo é pavimentado em cascalho preto. A oeste fica a entrada para a
+Prisão. A rua continua para o sul.
+~
+-
+s 101
+o 21
+$
+#101
+Rua da Agonia
+rua agonia cidadela
+  O solo é pavimentado em cascalho preto. A rua continua para norte e para 
+sul.
+~
+-
+n 100
+s 102
+$
+#102
+Rua da Agonia
+rua agonia cidadela
+  O solo é pavimentado em cascalho preto. A rua continua para o norte.
+~
+-
+n 101
+$
+%

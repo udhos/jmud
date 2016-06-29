@@ -1,0 +1,24 @@
+--------------------------------------------------------------------------
+$Id: README,v 1.1 2001/11/14 09:06:42 fmatheus Exp $
+--------------------------------------------------------------------------
+
+The files in this directory are here for your convenience in building
+and using JMud.
+
+-----------
+BUILD TOOLS
+-----------
+
+jlex.jar:
+
+	JLex: A Lexical Analyzer Generator for Java(TM)
+	Version 1.2.5
+	New releases: http://www.cs.princeton.edu/~appel/modern/java/JLex/
+
+	------------------------------------------------------------------
+	
+java_cup:
+
+	CUP: Constructor of Useful Parsers
+	Version 0.10j
+	New releases: http://www.cs.princeton.edu/~appel/modern/java/CUP/

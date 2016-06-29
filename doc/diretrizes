@@ -1,0 +1,136 @@
+----------------------------------------------------------------------
+DIRETRIZES                         início                         JMud
+----------------------------------------------------------------------
+
+INTRODUÇÃO
+
+  Este arquivo lista algumas diretrizes  para a codificação do JMud. A
+  idéia é ter um  guia de referência  rápida para  algumas decisões de
+  estilo e de projeto já feitas acerca dos rumos da implementação.
+
+
+DIRETRIZES
+
+  Inicialização de Atributos
+  --------------------------
+
+    Atributos que serão inicializados no construtor não devem receber
+    atribuição inicial.
+
+    // RUIM:
+
+    String carLabel = null;
+
+    class Car(String label) {
+      carLabel = label;
+    }
+
+    // BOM:
+
+    String carLabel;
+
+    class Car(String label) {
+      carLabel = label;
+    }
+    
+
+  Nomes de Identificadores
+  ------------------------
+
+    Devem ser significativos!
+
+    // RUIM:
+  
+    String n;
+  
+    // BOM:
+  
+    String itemName;
+
+  Retorno de Funções vs. Tratamento de Exceções
+  ---------------------------------------------
+
+    Sempre  que  possível, utilizar retorno  de  resultado ao invés de
+    exceções. 
+    
+  Aninhamento de IF's
+  -------------------
+
+    Deve ser evitado o aninhamento de IF's. Ou seja:
+
+    // RUIM:
+    if (a) {
+      if (b)
+        return true;
+      else
+        return false;
+    }
+    else
+      return false;
+	
+    // BOM:
+    if (!a)
+      return false;
+    if (b)
+      return true;
+    return false;
+
+  Logging
+  -------
+
+    O  método 'Log.log()' é obsoleto   e deve  ser  substitituído pelo
+    método 'Log.info()' ou  outro  método estático mais  apropriado de
+    'Log' .
+
+  Nice vs. JGP
+  ------------
+
+    As classes 'Nice' são obsoletas. Estão em processo de substituição
+    por  programação  genérica (package  jgp)  e  não  devem  mais ser
+    utilizadas.
+
+    Os componentes de 'util.jgp.list' também não devem ser utilizados,
+    mas sim substituídos pelos componentes JGP.
+
+    Pronto! Não existem mais vestígios de "Nice" no JMud.
+
+  Sintaxe dos arquivos de mundo
+  -----------------------------
+
+    Com a progressiva sofisticação do JMud, faz-se necessário melhorar
+    a sintaxe dos arquivos de mundo de modo  a torná-la mais flexivel,
+    expansível e inteligível.
+
+    A idéia básica é estabelecer  uma linguagem mais elaborada  para a
+    criação dos objetos da base de dados do JMud.
+
+    Esse processo será feito de forma gradativa.  Os arquivos de mundo
+    serão identificados por números de  versões.  Quando um formato de
+    arquivo evoluir para uma  nova versão, o JMud continuará aceitando
+    os anteriores.
+
+    Consultar o arquivo: formatos
+
+  Processamento na carga do mundo vs. em tempo de execução
+  --------------------------------------------------------
+
+    Seria   bom  que o   JMud   separasse  tanto  quanto  possível   o
+    processamento  que é feito na     carga  do mundo  daquele   que é
+    executado em tempo de  execução.  Por  exemplo, as automações  são
+    carregadas em  termos de parâmetros  que em  tempo de execução são
+    utilizados para criação/manipulação de "coisas"  do mundo. O ideal
+    é que a tradução de parâmetros em "coisas" já ocorresse no momento
+    da  carga. Dessa  forma,    em tempo  de execução,  as  automações
+    lidariam  diretamente  com as  "coisas"  desejadas (itens, portas,
+    salas)  ao invés de  com os  respectivos identificadores. Observar
+    que isso  pode ser  feito para  ações como  abrir portas, mas  não
+    ações como associar ganchos a   criaturas, porque nesse último   a
+    criatura   em   questão      varia   em   cada    instância     de
+    automação.   Interessante notar que a   definição de uma linguagem
+    sistemática conforme proposto  no item anterior casaria muito  bem
+    com essa idéia.
+
+
+----------------------------------------------------------------------
+DIRETRIZES                           fim                          JMud
+----------------------------------------------------------------------

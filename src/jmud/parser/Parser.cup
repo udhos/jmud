@@ -1,0 +1,148 @@
+/*
+  Parser.cup
+
+  Especificacao do analisador sintatico a ser gerado pelo CUP.
+ */
+
+import java_cup.runtime.*;
+
+import jgp.container.Vector;
+
+import jmud.parser.Lexer;
+import jmud.parser.SynAna;
+
+action code {:
+	/*
+	 * BEGIN
+	 * Codigo nesta secao estara presente na classe
+         * que executa as acoes das regras de producao.
+	 */
+
+	Vector nodeStack = new Vector();
+
+	/*
+	 * END
+	 * Codigo nesta secao estara presente na classe
+         * que executa as acoes das regras de producao.
+	 */
+:}
+
+parser code {:
+        /*
+         * BEGIN - Codigo nesta secao estara presente na classe Parser.
+         */
+
+	static SyntaxNode progTree;
+
+	public static void setTree(SyntaxNode tree) {
+		progTree = tree;
+	}	
+
+	public static SyntaxNode getTree() {
+		return progTree;
+	}	
+
+        /*
+         * END - Codigo nesta secao estara presente na classe Parser.
+         */
+:}
+
+terminal TK_ILLEGAL;
+terminal TK_IDENT;
+terminal TK_NUMBER;	
+terminal TK_STRING;
+terminal TK_EQ;
+terminal TK_RPAR;
+terminal TK_LPAR;
+terminal TK_RBRA;
+terminal TK_LBRA;
+terminal TK_SCOLON;
+
+non terminal 		  first;
+non terminal SyntaxMap	  map;
+non terminal 		  map_list;
+non terminal Object[]	  map_item;
+non terminal SyntaxLValue lvalue;    
+non terminal SyntaxNode   rvalue;
+non terminal SyntaxList   enum;
+non terminal              enum_list;
+
+start with first;
+
+first ::= enum:e
+          {:
+		SynAna.setTree(e);
+          :}
+	  ;
+
+map ::= TK_LBRA TK_RBRA 
+        {:
+	  	RESULT = new SyntaxMap();
+        :}
+	|
+	TK_LBRA map_list TK_RBRA
+        {:
+		RESULT = (SyntaxMap) nodeStack.remove();
+        :}
+	;
+
+map_list ::= map_item:i
+             {:
+		SyntaxMap map = new SyntaxMap();
+	        map.add((SyntaxLValue) i[0], (SyntaxNode) i[1]);
+	        nodeStack.insert(map);
+             :}
+	     |
+	     map_list TK_SCOLON map_item:i
+             {:
+	        ((SyntaxMap) nodeStack.last()).add((SyntaxLValue) i[0], (SyntaxNode) i[1]);
+             :}
+	     ;
+
+map_item ::= lvalue:l TK_EQ rvalue:r
+             {:
+	        Object[] pair = new Object[2];
+                pair[0] = l;
+                pair[1] = r;
+	        RESULT = pair;
+             :}
+             ;
+
+enum ::= TK_LPAR TK_RPAR 
+         {:
+	 	RESULT = new SyntaxList(); 
+         :}
+      	 |
+	 TK_LPAR enum_list TK_RPAR
+         {:
+                RESULT = (SyntaxList) nodeStack.remove();
+         :}
+	 ;
+
+enum_list ::= rvalue:r
+	      {:
+		SyntaxList lst = new SyntaxList();
+		lst.add(r);
+	        nodeStack.insert(lst);
+	      :}
+     	      |
+	      enum_list TK_SCOLON rvalue:r
+	      {:
+	        ((SyntaxList) nodeStack.last()).add(r);
+	      :}
+	      ;
+
+lvalue ::= TK_IDENT:id {: RESULT = new SyntaxIdent((String) id); :}
+           |
+	   TK_STRING:str {: RESULT = new SyntaxString((String) str); :}
+	   |
+	   TK_NUMBER:num {: RESULT = new SyntaxNumber((String) num); :}
+    	   ;
+
+rvalue ::= lvalue:l {: RESULT = l; :}
+	   |
+	   map:m {: RESULT = m; :}
+	   |
+	   enum:e {: RESULT = e; :}
+	   ;
+

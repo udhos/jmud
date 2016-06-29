@@ -1,0 +1,153 @@
+#0
+3
+um cadáver
+cadaver corpo morto
+Um cadáver repousa no solo.
+Um cadáver irreconhecível.
+~
+0 50 0 i -
+0
+$
+#1
+1
+uma faca
+faca
+Uma faca comum foi deixada aqui.
+Apenas uma pequena faca.
+~
+1 3 1000 a ab
+2 0 0 a
+$
+#2
+1
+uma espada curta
+espada curta
+Uma espada curta foi deixada aqui.
+Apenas uma espada curta.
+~
+1 4 1500 a ab
+3 0 0 a
+$
+#3
+1
+uma espada
+espada
+Uma espada foi deixada aqui.
+Apenas uma espada.
+~
+1 5 2000 a ab
+4 0 0 a
+$
+#4
+1
+uma espada larga
+espada larga
+Uma espada larga foi deixada aqui.
+Apenas uma espada larga.
+~
+1 5 2500 a ab
+5 0 0 a
+$
+#5
+1
+uma espada de duas mãos
+espada duas maos
+Uma espada de duas mãos foi deixada aqui.
+Apenas uma espada de duas mãos.
+~
+1 6 3000 b ab
+6 0 0 a
+$
+#11
+2
+um elmo de aço
+elmo aco
+Um elmo de aço foi deixado no chão.
+Um elmo metálico muito bem construído.
+~
+10 6 1000 a c
+3 0 0
+$
+#12
+3
+uma sacola
+sacola
+Uma sacola repousa no solo.
+Uma sacola normal.
+~
+1 2 100 - a -
+30
+$
+#13
+2
+um par de botas
+par botas
+Um par de botas descansa no canto.
+Parece um par de botas de couro.
+~
+2 3 100 b tu
+2 0 0
+$
+#14
+2
+uma meia
+meia
+Aqui está um pé de meia.
+Isso mesmo: UM pé de meia.
+~
+0 1 100 a tu
+1 0 0
+$
+#15
+2
+uma armadura completa
+armadura completa
+Aqui está uma armadura completa.
+Sim, um conjunto completo de armadura!
+~
+10 50 100000 b cdefhijklmnopqrstu
+100 0 0
+$
+#16
+4
+um quadro de avisos
+quadro avisos
+Este é o quadro de avisos social.
+Você pode deixar suas mensagens escritas aqui.
+~
+0 0 0 ij -
+2
+$
+#17
+5
+uma chave
+chave
+Aqui está a chave primordial.
+Esta chave abre a porta norte da sala "Centro do Universo".
+~
+1 1 1000 a ab
+1 n
+1 s
+$
+$
+#18
+6
+um punhado de ouro
+punhado ouro
+Uma pequena quantidade de ouro foi abandonada aqui.
+Belo punhado de ouro.
+~
+1 0 0 ai -
+0 10
+$
+#19
+2
+o medalhão da prosperidade
+medalhao prosperidade
+Esse é um grande e desajeitado medalhão esculpido
+em um metal desconhecido.
+~
+1 10 10 aj -
+1 1 1
+$
+%

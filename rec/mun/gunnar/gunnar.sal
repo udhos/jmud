@@ -1,0 +1,50 @@
+#1
+Camara Alta dos Gunnar
+gunnar
+  Voce fica espantado com a solenidade que transborda dessa sala
+repleta de estatuas dos Grandes Guerreiros que construiram o Império.
+~
+-
+n 2
+s 3
+l 4
+o 5
+$
+#2
+Caminho Glorioso do Guerreiro
+glorioso
+  O ar de Triunfo e Conquista dominam o corredor a sua frente que termina em
+um enorme portal de onde emana um clarão de luz azulada. Você não se
+sente digno de estar nesse caminho, e algo lhe aconselha a sair daqui.
+~
+-
+s 1
+$
+#3
+Mirante
+mirante
+  Vertigem. Sua visão escurece e seu corpo tomba para o abismo de 2000 metros
+que separa a Camara do chão que daqui não pode ser visto.
+~
+a
+n 1
+$
+#4
+Camara Proibida dos Deuses
+proibida
+  Seus pés acabam de conspurcar o recinto reservado aos Deuses da Guerra.
+A Ira Divina recairá sobre você.
+~
+-
+$
+#5
+Camara do Poente
+poente
+  O momento sagrado do por do sol esclarece sua mente e você percebe que
+realmente não deveria ter entrado nessa sala. O pôr do sol reflete a morte que
+se aproxima de você por mãos terriveis.
+~
+a
+l 1
+$
+%

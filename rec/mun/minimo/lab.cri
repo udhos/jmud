@@ -1,0 +1,63 @@
+#100
+0
+Sasha
+sasha
+A Sasha está aqui!
+Ela é a Sasha.
+~
+1 2 -
+20
+0 1000
+10 po 100 pp 1000 pc 10000 cr
+-
+$
+$
+#110
+0
+Guardião
+guardiao
+Um guardião protege a saída norte.
+Guardião da passagem norte.
+~
+5 1 -
+40
+1000 0
+20 po 300 pp 4000 pc 50000 cr
+guardiao_sul
+$
+$
+#120
+0
+Mestre de Jiu-Jitsu
+mestre jiu jitsu jiu-jitsu
+Um mestre de jiu-jitsu busca aprendizes.
+Com aparência ameaçadora, o mestre de jiu-jitsu procura intimidar futuros aprendizes.
+~
+10 1 -
+90
+100 2000
+50 po 400 pp 3000 pc 20000 cr
+-
+$
+c 0 5 +
+c 1 2 -
+c 2 2 -
+$
+#130
+0
+Mestre Buda
+mestre buda monge
+Buda medita.
+Buda pensa.
+~
+20 1 -
+200
+5000 5000
+0 cr
+-
+t 15
+$
+t 5 +
+t 5 -
+$
+%

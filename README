@@ -1,0 +1,181 @@
+--------------------------------------------------------------------------
+$Id: README,v 1.3 2002/01/04 22:57:50 evertonm Exp $
+--------------------------------------------------------------------------
+
+COPYRIGHT NOTICE
+
+  JMud - Mud Server written in Java
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+  
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program -- see the file COPYING; if not, write to
+  the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+  Boston, MA 02111-1307 USA 
+
+
+INTRODUCTION
+
+  JMud is a MUD server written in Java(TM) from scratch. This document
+  assumes the reader is familiar with terms like 'server', 'mud' and
+  'Java'.
+
+  This is a (Brazilian) Portuguese version. Multi-lingual support is
+  under development.
+
+  By now, one should keep in mind that JMud is at early development
+  stage; thus it's not pretty useful for those who don't have some
+  experience with mud server programming.
+
+  There are lots of information to add to this and to other document
+  files. But once JMud still requires many essential MUD
+  functionalities, the documentation job probably is going to be
+  postponed.
+
+
+GETTING NEW RELEASES
+
+  The latest releases of JMud can be obtained from:
+
+    http://jmud.sourceforge.net
+
+
+REQUIREMENTS
+
+  The JMud is a server application written in Java(TM). The good thing
+  is that it may be executed in any environment for whose there is a
+  Java Virtual Machine (JVM). The bad thing is that to run it, one
+  will typically need two tools:
+
+  The Java Compiler
+
+    The compiler is a program that produces code which the JVM is able
+    to run. For such purpose, JMud developers use the Jikes
+    installation that comes default with Debian GNU/Linux.
+
+  The Java Interpreter
+
+    The interpreter is a program that implements the JVM. JMud
+    developers prefer to use the Kaffe installation that comes default
+    with Debian GNU/Linux.
+
+OTHER TOOLS
+
+  Apache Ant is a Java based build tool. In theory it is a kind of
+  make without make's wrinkles. That should ease the build process in
+  many cases.
+
+  * See links below.
+
+
+THIS DIRECTORY
+
+README		- this file
+TODO		- a list of the changes and ideas
+build.xml	- the build script (it requires the Ant tool)
+jmud.cfg	- the configuration file
+rec/		- the resources directory (please see jmud.cfg)
+doc/		- the documentation repository (Portuguese)
+src/		- the source code
+src/jmud	- the JMud itself
+src/jgp		- the java generic programming library
+lib/		- some jar's for your convenience in building and using JMud
+lib/README	- how to find library sources
+lib/LICENSE.*	- license info by jar
+
+
+BUILDING
+
+  USING ANT
+
+    Type:
+        ant
+
+  WITHOUT ANT
+
+    Type:
+	cd src
+	jar xvf ../lib/java_cup_runtime.jar
+	jikes jmud/JMud.java
+
+  TIP: Old Jikes versions need the switch "-encoding latin1" to
+    support non-ascii characters for the Portuguese language.
+
+  
+RUNNING
+
+  USING ANT
+
+    Type:
+        kaffe -jar dist/jmud*.jar
+
+  WITHOUT ANT
+
+    Move jmud.cfg to src/.
+    Move rec/     to src/.
+
+    Type:
+        kaffe jmud.JMud
+
+
+  JMud's logging info is expected to quickly fill up your terminal.
+
+  As soon as you see the message 'Esperando por conexões' (Waiting
+  for connections), that means the JMud server is ready.
+
+
+CLIENTS
+
+  You can use a simple telnet as client. In another prompt, type:
+    'telnet <host> <port-number>'
+
+  EXAMPLES
+
+  1) If JMud is running in your machine and listening on the default
+     port-number:
+
+    telnet 127.0.0.1 1234
+
+  2) If JMud running in the 'zeus.provedor.com.br' machine:
+
+    telnet zeus.provedor.com.br 1234
+
+
+HINTS
+
+  * The first user to log into JMud, and only him, may have access to
+  super-user privileges by invoking the command: 'moderador'.  Other
+  super-users need be named by the first super-user, through the
+  'promova' command.
+
+  * Use the 'commandos' command to list all commands that your user
+  has access.
+
+
+SUPPORT
+
+  In order to access the rich Source Forge facility set, please visit
+  the following URL:
+
+  http://sf.net/projects/jmud
+
+
+USEFUL LINKS
+
+  Kaffe,	http://www.kaffe.org
+  Jikes,	http://oss.software.ibm.com/developerworks/opensource/jikes
+  Sun JDK,	http://java.sun.com
+  Apache Ant	http://jakarta.apache.org/ant
+
+
+                                --x--
+
+* Java is a trademark of Sun Microsystems, Inc.

@@ -1,0 +1,94 @@
+/*
+  Lexer
+
+  Especificacao do analisador lexico a ser gerado pelo JLex.
+ */
+
+package jmud.parser;
+
+import java_cup.runtime.*;
+
+%%
+
+%{
+    /*
+     * JLex Directives
+     */
+%}
+
+%class      Lexer
+%function   next_token
+%type       Symbol
+%implements Scanner
+
+%public
+%cup
+%full
+%char
+%line
+%ignorecase
+%state COMMENT, STRING, STRING_IGNORE
+
+IDENT  = [a-zA-Z][a-zA-Z0-9_]*
+NUMBER = [0-9]+
+
+%eofval{
+	return new SyntaxSymbol(sym.EOF, "EOF", yyline, yychar);
+%eofval}
+
+%{
+	private int          commentNesting = 0;
+	private StringBuffer strBuf;
+        private int          stringLine;
+        private int          stringPosition;
+%}
+
+%%
+
+<YYINITIAL>	"="		{ return new SyntaxSymbol(sym.TK_EQ, yytext(), yyline, yychar); }
+<YYINITIAL>	")"		{ return new SyntaxSymbol(sym.TK_RPAR, yytext(), yyline, yychar); }
+<YYINITIAL>	"("		{ return new SyntaxSymbol(sym.TK_LPAR, yytext(), yyline, yychar); }
+<YYINITIAL>	"}"		{ return new SyntaxSymbol(sym.TK_RBRA, yytext(), yyline, yychar); }
+<YYINITIAL>	"{"		{ return new SyntaxSymbol(sym.TK_LBRA, yytext(), yyline, yychar); }
+<YYINITIAL>	";"		{ return new SyntaxSymbol(sym.TK_SCOLON, yytext(), yyline, yychar); }
+
+<YYINITIAL>	{IDENT}		{ return new SyntaxSymbol(sym.TK_IDENT, yytext(), yyline, yychar); }
+<YYINITIAL>	{NUMBER}	{ return new SyntaxSymbol(sym.TK_NUMBER, yytext(), yyline, yychar); }
+
+<YYINITIAL>	"/*"		{ ++commentNesting; yybegin(COMMENT); }
+<YYINITIAL>	[\ \n\r\t]+	{ /* ignore */ }
+<YYINITIAL>	"\""		{ 
+					strBuf         = new StringBuffer(); 
+					stringLine     = yyline;
+					stringPosition = yychar;
+					yybegin(STRING);
+				}
+<YYINITIAL>	.		{ return new SyntaxSymbol(sym.TK_ILLEGAL, "INITIAL: " + yytext(), yyline, yychar); }
+
+<COMMENT>	"/*"		{ ++commentNesting; }
+<COMMENT>	"*/"		{ 
+					--commentNesting;
+					if (commentNesting == 0)
+						yybegin(YYINITIAL);
+				}
+<COMMENT>	.|\n		{ /* ignore */ }
+
+<STRING>	"\""		{ 
+					yybegin(YYINITIAL);
+                                        String tmp = strBuf.toString();
+					return new SyntaxSymbol(sym.TK_STRING, tmp, stringLine, stringPosition + tmp.length()); 
+				}
+<STRING>	"\n"		{ strBuf.append("\n"); }
+<STRING>	"\r"		{ strBuf.append("\r"); }
+<STRING>	"\t"		{ strBuf.append("\t"); }
+<STRING>	\\\"		{ strBuf.append("\""); }
+<STRING>	\\\\		{ strBuf.append("\\"); }
+<STRING>	\\[\ \n\r\t]+	{ yybegin(STRING_IGNORE); }
+<STRING>	.		{ strBuf.append(yytext()); }
+
+<STRING_IGNORE>	\\		{ yybegin(STRING); }
+<STRING_IGNORE>	[\ \n\r\t]+	{ /* ignore */ }
+<STRING_IGNORE>	.		{ return new SyntaxSymbol(sym.TK_ILLEGAL, "STRING_IGNORE: " + yytext(), yyline, yychar); }
+
+
+

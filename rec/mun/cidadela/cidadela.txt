@@ -1,0 +1,24 @@
+
+nivel -2
+
+        -1a
+       o
+
+nivel -1
+
+        -2a
+       o
+       |0a 
+     o-o-o
+       |
+       o
+
+
+nivel 0
+
+      -1a 
+         o-o-o
+             |
+             o
+             |
+             o

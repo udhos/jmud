@@ -1,0 +1,14 @@
+;
+; habilidades.dep
+;
+
+serenidade:   meditacao
+foco:         meditacao
+perseveranca: foco
+disturbio:    foco
+chi:          foco serenidade
+dim-mak:      foco serenidade
+
+;
+; habilidades.dep
+;

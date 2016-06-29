@@ -1,0 +1,57 @@
+#0
+0
+uma cobaia
+cobaia
+Uma pequena cobaia de laboratório.
+A cobaia aguarda para ser dissecada.
+~
+10 0 -
+0
+0 0
+
+-
+t 0
+l 0 1
+c 0 2
+a 0 3
+men 5 4 3 2 1
+agi 4 3 2 1
+$
+$
+#1
+0
+um policial
+homem policial policia tira guarda soldado
+Um policial passeia pelo lugar.
+Ele veste... se parece com... procura por... tem um ar...
+Nao sei escrever descricao mesmo, admito.
+~
+5 1 a
+0
+0 0
+
+-
+t 6
+$
+c 0 2 +
+c 1 2 -
+c 2 2 -
+c 3 2
+$
+#2
+1
+um cachorro
+cao cachorro vira-lata fido
+Um vira-lata, fido-alike, revira restos de lixo.
+Aqui vai todo o bla-bla-bla descrevendo o fido.
+~
+1 0 a
+0
+0 0
+
+-
+t 5
+$
+t 3 -
+$
+%

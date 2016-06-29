@@ -1,0 +1,12 @@
+#1
+Mundo Mínimo
+minimo.zon	minimo/
+grecia.zon	grecia/
+gunnar.zon	gunnar/
+cidadela.zon	cidadela/
+$
+l 0 1   1 2
+o 1 2   0 1
+l 1 101 2 2
+o 2 2   1 101
+%

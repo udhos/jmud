@@ -1,0 +1,459 @@
+LEGENDA
+
+- = a fazer
+/ = em andamento
++ = pronto
+? = nao ha' certeza sobre a necessidade disso
+
+Nota: identacao significa dependencia.
+
+
+IDEIAS E PENDENCIAS
+
+/ atualizar a documentacao: urls e compilacao
+- melhorar analise sintatica do novo formato de mundo
+  - mais robustez para o parser (tratamento de excessoes)
+- ajustes para integracao das modificacoes do fmatheus:
+  - transformar em habilidade:
+    - atalho
+    - cace
+    - regiao
+  - usar padrao de sintaxe:
+    - atalho
+    - cace
+    - regiao
+- transferir dinheiro de um personagem morto para o corpo
+  - melhorar o item que representa dinheiro
+  - transformar o item em dinheiro quando houver interacao 
+- caminhos de magia com sistema de dependencias
+- racas para expressar vantagens/desvantagens intrinsecas dos personagens
+- maneira de controlar personagens "imortais" ou muito poderosos,
+  mantendo-os ocupados
+- repositorios de recursos: casas, bancos, etc
+- clans administrado por jogadores
+- lojas administradas por usuarios
+? criar um par de comandos para habilitar/desabilitar poderes
+  em personagems
+  - forneca <dom> <personagem> [<subcomandos>]
+  - revogue <dom> <personagem> [<subcomandos>]
+/ refinar mecanismo de magia
+  / conhecimento de magia distinto por personagem
+    + salvamento/recuperacao de magias
+    - nivel de conhecimento da magia
+  - melhorar funcionamento dos efeitos
+    - dissipar efeitos via Scheduler
+- functor Procedure que retorne void para evitar "return null" inocuo no jgp
+? vincular o tempo artificial ao tempo real
+- mudanca de senha
+  - implementacao de estado do cliente 
+? submeter onisciencia ao posto
+- minimizar destruicao de dados em caso de falha de escrita:
+  - personagens
+- evitar capote do sistema em caso de falha de leitura de arquivo
+  - leitura de string nula
+- remover metodos de teste de identidade de classe, substituindo por
+  instanceof
+  - Char.isPlayer()
+  - Item.getContainer()
+  - Place.isRoom()
+- sinonimos definidos pelos usuarios
+? separar a carga do personagem dos itens que ele possui
+  (ou implementar cache para items?)
+- flag de preferencia para que personagens de mesmo posto possam
+  usar comandos administrativos entre si
+- registro de uptime
+- degeneracao de cadaveres
+/ reunir as palavras-chaves na classe Keywords
+- expulsar personagens com grandes periodos de inatividade
+  - jogando
+  - logando
+/ melhorar mensagens de erro ao carregar base de dados do mundo
+/ sessao criptografada
+  + rascunho para troca de chaves criptograficas via Diffie-Hellman
+  + cipher blowfish (seguro se a chave nao for usada em mais de uma
+    mensagem, o que compromete a criptografia de sessao; usar apenas
+    para atualizacao de senha?)
+  ? cipher twofish
+- usar comandos de anotacao para modificar a descricao
+  - copie
+  - descricao
+- modificar comandos de loja para encontrar o vendedor
+  - compre
+  - venda
+  - preco
+- xnames (substrings proibidas em nomes de jogadores)
+- wiz-lock (travar entrada de jogadores)
+- banimento de sites
+/ catalogo do JGP (em doc/jgp)
+/ implementar sistema de luta
+? interface Exit
+- exigir limites nas coisas das zonas
+- verificar interseccoes entre zonas
+- sistema de correio (mail)
+/ separar o mundo minimo de uma regiao de testes
+- sistema de coordenadas nas salas (essa ideia parece fantastica)
+/ melhorar a sintaxe dos arquivos de mundo (ideia do Nalon)
+  / elaborar uma linguagem de descricao
+  - escrever (manualmente?) um parser (analise descendente ou ascendente?)
+- adicionar fome/comidas e sede/liquidos
+- simplificar as armas basicas
+- recarregar pertences dos usuarios dentro dos recipientes 
+  originais
+- 'ficha sala' nao deve esconder um personagem de si mesmo,
+  devido ao efeito clone 
+  - melhorar a implementacao do algoritmo de listagem de clones
+/ agrupar objetos globais em uma classe Global, para 
+  evitar passa'-los como parametros
+  / Config
+/ transportar sintaxe dos comandos para a CommandTable
+  + HostsCommand
+  + CacheCommand
+  + SyntaxCommand
+  + RoomsCommand
+  + InventoryCommand
+  + SpellsCommand
+  - melhor: transportar para o arquivo rec/sintaxe.sin
+    + +magia
+    + -magia
+? delayed write para fazer simetria com cache
+
+
+
+
+ATUALIZACOES
+
+----
+0.25
+----
+
+2001/11/06 + removida redundancia com o pacote em classes de comandos e magias
+           + pacotes utilitarios movidos para o pacote: util
+2001/11/03 + classes jgp proprias do jmud movidas para o pacote: jgp
+           + ganchos movidos para o pacote: hook
+           + magias movidas para o pacote: magic
+           + abilidades movidas para o pacote: ability
+           + profissoes movidas para o pacote: job
+2001/11/02 + comandos movidos para o pacote: command
+2001/10/31 + nova tarefa ant: javadoc
+2001/10/30 + pacote do projeto modificado de src para: jmud
+           + JGP movido para um pacote separado: jgp
+2001/10/27 + Makefile substituido por build.xml (Ant)
+
+2000/03/01 + comp.bat e run.bat substituidos por wmake.bat
+2000/02/26 + guardar numero de linha no analisador lexico
+           + ajustar identacao na apresentacao da arvore do analisador 
+             sintatico
+
+----
+0.24
+----
+
+2000/02/23 + integradas modificacoes do fmatheus:
+             + comandos:
+               + atalho
+               + cace
+               + regiao
+             + magia: terremoto
+             + busca em largura
+2000/02/20 + removidos logos da distruicao para reduzir o tamanho do pacote
+           + versao preliminar do manual depositada no diretorio 'doc'
+           + README.jlex com licenca e referencia para o JLex
+	   + README.cup com licenca e referencia par ao Java CUP
+           + criado jar com runtime do CUP
+           + ocultamento de itens invisiveis na listagem das lojas
+2000/02/19 + formatos dos arquivos de profissoes das habilidades e de
+             dependencias de habilidades documentados
+2000/02/18 + identificacao dos personagens da sala via onisciencia
+           + remocao de arquivo obsoleto: Sorter.java
+           + comando para evolução de profissao
+2000/02/17 + acrescentada sintaxe do arquivo de mestres ao documento
+             'formatos'
+           + comando para acionamento das habilidades conhecidas
+           + habilidade 'chi'
+2000/02/15 + mestres para ensinar habilidades e profissoes
+           + comando privilegido 'mestre' para depurar sistema 
+             de aprendizagem
+           + gambiarra de 'roles' nos personagens (Char), para
+             contornar limitacao contra heranca multipla
+           + corrigido comportamento do comando 'loja' ao receber
+             numero invalido de loja
+2000/02/09 + obtencao do stream de saida da classe Log para emissao
+             de mensagens
+           + usar Merger como concatenador preferencial de separadores
+2000/02/04 + adaptacoes para continuar funcionando em Windows 
+             + usar arquivo ao inves de link simbolico na classe de idioma
+             + remover %notunix da especificacao do analisador lexico
+           + montagem de arvore sintatica atraves das acoes do parser
+
+----
+0.23
+----
+
+2000/01/30 + remocao do codigo criptografico da distribuicao do JMud
+           + ajustes cosmeticos na classe Money e no comando 'fundos'
+           + sistema de dependencias de habilidades
+	     + arvore de dependencias
+             + profissoes das habilidades
+           + analisador sintatico ascendente gerado por CUP/JLex
+2000/01/16 + habilidades para personagem
+             + comandos:
+               + dons: lista habilidades existentes
+               + habilidades: lista habilidades do personagem
+               + +habilidade: acrescenta habilidade ao personagem
+               + -habilidade: remove habilidade do personagem
+2000/01/09 + suporte estatico para multiplos idiomas
+2000/01/02 + mecanismo de profissoes
+             + comandos
+               + profissoes: lista profissoes existentes
+               + +profissao: adiciona profissao a um personagem
+               + -profissao: remove profissao de um personagem
+           + removidas referencias quebradas do README
+           + comando sintaxe exibe propriedades dos comandos 
+           + sintaxe do comando 'anote'
+           + evento do Scheduler removido antes de ser acionado, ja'
+             que ele pode (e eventualmente pretende) ser re-inserido
+           + StrUtil.listVector obsoleto, substituido por StrUtil.concat
+           + apresentar identificador da loja na ficha do vendedor
+           + excesso de quebra de linha na ficha dos prototipos de criatura
+1999/12/19 + controle privilegiado sobre magias
+  	     + +magia: fornece magia a um personagem
+  	     + -magia: revoga magia de um personagem
+	   + expulsar criaturas mortas do mundo
+	   + lidar com a morte de usuarios
+           + melhorar scripts batch (Windows)
+             + run.bat
+             + comp.bat
+1999/11/23 + Blowfish verificado contra casos de teste setKey
+1999/08/14 + usar o formato PNG de imagem para logos do JMud
+           + colocar imagens no diretorio 'img'
+           + exemplo de invocacao do cliente de telnet no arquivo README
+           + removido "bug do AND" do Blowfish
+           + Blowfish verificado contra os casos de teste ECB
+
+----
+0.22
+----
+
+1999/08/01 + adaptacao do Blowfish para chaves de tamanho arbitrario
+           + obter sintaxe dos comandos de um arquivo texto
+           + substituir invocacoes do metodo !ready() por simulacao do eos()
+             nas utilizacoes da classe LineReader
+1999/07/11 + listar magias disponiveis por personagem: 'magias' 
+	   + listar magias existentes no mundo: 'grimoire'
+	   + comando para verificar efeitos sobre personagem: 'efeitos'
+	   + fatorar funcao para determinar se um personagem pode acionar
+             funcoes administrativas sobre outro (dependendo do posto
+             de ambos): Char.forbidAccess
+           + remover aviso de desobrigacao (GNU GPL cuida dessa questao)
+	   + excesso de espacos no comando 'ficha' sobre criaturas
+	   + metodo forbidAdminParam de Char para proibir parametros
+             administrativos de comandos
+1999/06/25 + elaborar um modelo generico de agendamento de eventos, 
+             provavelmente com timestamps e fila de prioridade
+1999/06/23 + otimizado Blowfish
+1999/05/26 + classe Clock para consultas temporais
+	   + classe Scheduler para agendamento de eventos
+	   + usar todos os digitos do ano no log (y2k)
+1999/05/24 + implementar fila de prioridade: Heap
+1999/05/21 + fazer concatenacao do comando 'salas' com o Enchainer
+1999/05/17 + verificar disponibilidade da porta TCP antes de carregar o mundo
+1999/05/10 + usar pivo central no QuickSort para evitar pior caso das salas
+           + estudar modificacao do buffer de mensagens dos clientes
+             para usar um vetor de strings ao inves de concatena-las:
+             o melhor e' usar um metodo write() para escrever (ou
+             armazenar em um buffer) as strings no momento em que sao geradas
+             + substituir concatenacao por send's
+             + verificar inconsistencia de separadores
+             + adicionar buffer de memoria de linhas nos clientes
+1999/04/26 + carregar subversao apenas no boot 
+           + atualizacao do arquivo run.bat (execucao em Windows)
+
+----
+0.21
+----
+
+1999/04/23 + insercao automatica da data da ultima compilacao
+           + melhoria do cache LRU
+             + nao acrescentar informacao na atualizacao
+             + corrigir carga de informacao nula
+             + forcar sincronizacao dos metodos de acesso
+             + mostrar estatistica do cache
+           + comando 'sintaxe' para exibir sintaxe dos comandos
+1999/04/21 + comando 'maquinas <usuario> [arquivo]' para verificar
+             usuarios que nao estejam presente
+             + fatorar mecanismo de carga/descarga de personagens,
+             + cache LRU
+           + remover metodos obsoletos da classe Log
+1999/04/20 + substituir a classe Debug pela nocao de nivel de depuracao
+           + acelerar heuristica para verificar alcancabilidade das salas
+1999/04/17 + garantir ordenacao ao expulsar personagem duplicado
+1999/04/09 + melhorada deteccao de fim de stream para os clientes
+1999/04/07 + evitar deteccao de itens/personagens invisiveis pelo 
+             comando 'ficha' (isso ainda era possivel em alguns casos!)
+           + melhorada formatacao do arquivo TODO
+1999/03/26 + comando 'maquinas' procura personagem no mundo
+1999/03/07 + 'ficha sala' capota o sistema
+             + passar 'looker' para o getSheet, quando necessario
+             + remover a interface Sheetable
+1999/03/06 + melhorar a obtencao da versao
+1999/03/01 + rotulo de posto no comando 'ficha'
+           + registrar os clientes mais recentes
+           + registrar maquinas mais recentes de cada cliente
+	   + comando 'maquinas' para consultar maquinas recentes dos clientes
+           + obter personagem do cliente duplicado antes de expulsa-lo
+           + restringir excecoes esperadas ao gravar estado
+
+----
+0.20
+----
+
+1999/02/28 + esconder invisibilidade do comando 'ficha'
+             (implica em corrigir invisibilidade em todo o sistema)
+           + corrigida senha nao salva para personagens novos
+           + gravar trava de newbie-lock com o StateKeeper
+           + criar o .jar dentro do diretorio classes para evitar
+             a necessidade de configurar o CLASSPATH
+           + corrigir mensagem quando se digita "escreva q"
+1999/02/25 + newbie-lock (desabilitar criacao de novos jogadores)
+1999/02/24 + cabecalho GNU GPL em todos os arquivos de 'src'
+	   + maximo de clientes simultaneos
+1999/02/23 + proteger parseInt's com NumberFormatException
+1999/02/19 + remocao do IndexParser
+           + IndexToken => IndexedToken
+           + MassiveAction => MultipleItemsHandler
+1999/02/18 + garantir barras em nomes de diretorio no arquivo de
+             configuracao
+           + ferramenta JServer
+           + removidas salas duplicadas da cidadela
+1999/02/11 + remover vestigios da interface Clone
+           + remover letras minusculas no inicio do nome de items em:
+	     + CopyCommand
+             + EraseCommand
+             + ReadCommand
+             + WriteCommand
+           + corrigir recursao infinita no adaptador Finder
+1999/02/07 + substituir o metodo "canSee" de Char pelo "canBeSeenBy" de
+             Viewable
+             + eliminar metodos e classes relacionados que se tornaram 
+               obsoletos
+	   + proteger usuarios invisiveis de deteccao
+	   + acrescimo de testes ao realizar acao sobre multiplos itens
+           + corrigir verificacao na mobilidade dos grupos
+             + nao seguir quando a posicao nao for apropriada
+             + nao seguir quando nao puder ver o lider
+1999/02/05 + remover "findBoard"s dos Owners quando nao forem mais necessarios
+           + personagens invisiveis desaparecendo de comandos informativos
+             + quem
+             + usuarios
+           + estender comando 'privilegios' para aceitar nome de usuarios
+1999/02/03 + adicionado rascunho do cliente JMud
+           + evitar modificacao dos ganchos dos prototipos nas criaturas
+1999/01/30 + tratar quadro como item: 
+	     + copie
+	     + escreva
+	     + leia
+	     + apague
+           + substituidos tratamentos de excecao desnecessarios por
+	     retornos de valor
+           + multiplos ganchos por criatura
+             + detecao de ganchos duplicados
+           + procedimento generico para encontrar referencias
+           + parsing melhorado via CommandTokenizer
+           + adaptacao da CommandTable para usar o MassiveAction e indices
+           + reconhecimento de sinomimos com expressoes logicas simples
+             (& e | nao combinados)
+           + suporte para geracao e execucao em formato .jar
+1999/01/27 + criaturas agressivas: atacam um jogador que entra na sala,
+             implementado via Hook
+	   + adicionar verificacao de quando os bloqueadores podem agir
+	   + corrigido ponteiro nulo na listagem de itens de loja
+????/??/?? + mover StateKeeper e List para packages proprios
+	   + implementar Queue
+	   + automacao
+	   + recipientes
+	   + ultimo a entrar na sala nao eh o primeiro em olha
+	   + mensagem errada quando o personagem nao consegue ir numa direcao
+	   + equipar: verificar e testar rotinas de equipamento
+	   + remover
+	   + classe logger
+	   + expandir flags para 32 bits
+	   + colocar base e limite nas zonas
+	   + vetor de clientes: nome x id
+	   + sistema de quadros (boards)
+	   + corrigir asteriscos do equipamento
+	   + corrigir duplicacao de mob de mesmo id que um player quando       
+             estao na mesma sala
+	   + comando traga
+	   + comando onde
+	   + mover fontes para subdiretorio src
+	   + criaturas andarilhas
+	   + documentar um README basico
+	   + cadaver e trasferencia de itens ao morrer
+	   + manipulacao de portas: abrir, fechar, trancar
+	   + manipulacao de posicoes: sente, deite, levante
+	   + implementar agrupamento: grupo, siga, etc
+	   + sistema monetario
+	   + verificar trancamento/destrancamento de portas
+	   + comando para modificar atributos: atribua
+	   + lojas (shops)
+	     + listagem
+	     + preco
+	     + compra
+	     + venda
+	   + cores
+	   + colocar o jmud em um package 
+	   + interpreter deve bloquear quando o sistema estiver vazio
+	   + corrigir modelo de programacao generica
+	   + melhorado algoritmos de ordenacao
+	   + melhorado controle de slots de tempo e de espaco por cliente
+	   + limitado tamanho das linhas de comando dos usuarios
+	   + introduzido mapa de cores
+	   + mover metodos estaticos de Currency para uma classe Money (?)
+	   + senha
+	   + estender Queue de Vector
+	   + remocao de util.nice e util.list
+	   + substituicao dos retornos dos findxxxbyyy de excecao para null e
+	     tratar esse resultado corretamente
+	   + alterar findClient/findhelptopic para a politica do null em 
+             Manager/Client
+	   + verificar se todos os parseInt estao sendo devidamente tratados
+	   + tentar melhorar o consumo de memoria das portas
+	   + remocao de excecoes na localizacao de quadros de mensagens
+	   + consertar o comando 'siga'
+	   + simplificar o SheetSystem
+	   + corrigir problema de "dupla morte"
+	   + melhora na performance de substituicao de strings
+	   + sistema de ganho e distribuicao de experiencia
+	   + sofisticar o comportamento dos mobs
+	     + gatilhos para comandos
+	       + anexados via prototipo
+	       + anexados via automacao
+	     + gatilhos temporais
+	   + distribuicao de experiencia pro grupo
+	   + elaborar forma de regeneracao
+	   + automatizacao para portas
+	   + corrigidas diversas falhas nas automatizacoes
+	   + comportamento (alinhamento) percentual
+	   + extendido o formato de um comando da tabela de comandos 
+             (CommandTable)
+	   + separar entradas da tabela de comands em arquivos distintos
+	   + comando 'onisciencia' para teste de caracteristicas ocultas
+	   + itens invisiveis 
+	   + personagens invisiveis
+	   + atualizar 'clone' para modelo de programacao generica
+	   + comando 'salve' para gravar o personagem sob demanda do usuario
+	   + portas ocultas
+	   + sinonimos com prefixo e casamento exato
+	   + criar uma zona inicial verdadeira
+	   + definir politica de separacao entre: posto/nivel/titulo
+	   + corrigir mostra de conteudo de recipientes
+	     (isso foi danificado na reforma dos 'clones' para 'jgp')
+	   + melhorar os privilegios dos personagens convidados (guests)
+	   + aperfeicoar o comando 'comandos'
+	   + criar o comando 'privilegios'
+	   + comando 'invisibilidade'
+	   + corrigir deteccao de invisibilidade no procedimento de
+	     listagem de clones 
+	   + comando 'versao' e opcao -versao para linha de comando 
+	   + adicionar verificacao de quando os bloqueadores podem agir
+

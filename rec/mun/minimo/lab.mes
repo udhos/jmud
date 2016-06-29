@@ -1,0 +1,49 @@
+
+/*
+	lab.mes
+
+	/* Comentario aninhado */
+*/
+
+(
+	{
+		criatura_id = 120;
+		habilidades_ensinadas = {
+			"chute"   = 5; 
+			"esgrima" = 5
+		};
+		profissoes_ensinadas = {
+			"guerreiro" = 5
+		}
+	};
+
+	{
+		/* Buda */
+
+		criatura_id = 130;
+		habilidades_ensinadas = {
+			"serenidade" = 10;
+			"foco"       = 10
+		};
+		profissoes_ensinadas = {
+			"guerreiro" = 10;
+			"monge"     = 10
+		}
+	};
+
+	(
+		"uma";
+		"lista";
+		{
+			1 = 2;
+			3 = 4;
+			5 = (
+				1;
+				2;
+				3
+			)
+		};
+		"inutil"
+	)
+
+)

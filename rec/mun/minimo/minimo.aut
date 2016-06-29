@@ -1,0 +1,17 @@
+;
+; minimo.aut
+;
+
+c 0 5 1 1  ; coloca criatura 1 na sala 1
+i 0 5 1 1  ; coloca item 1 na sala 1
+d 1 5 1 1  ; dá item 1 para criatura 1 -- faca no inventario
+e 1 5 1 1  ; equipa item 1 na criatura 1 -- faca empunhada
+
+i 0 5 12 1 ; uma sacola na sala 1
+p 1 5 1 12 ; coloca um elmo na sacola
+
+i 0 1 16 1 ; um quadro de avisos na sala 1
+ 
+i 0 0 1 1  ; tenta colocar um item em excesso na sala 1
+
+%

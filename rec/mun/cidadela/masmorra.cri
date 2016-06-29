@@ -1,0 +1,30 @@
+#1
+0
+o carcereiro
+carcereiro
+O sonolento carcereiro vigia a masmorra.
+~
+1 1 -
+1
+10 15
+30 pc
+guardiao_cima
+$
+t 3 -
+$
+#2
+0
+o prisioneiro
+prisioneiro violento
+O prisioneiro violento procura intimidar você.
+Um perigoso bandido mal-encarado.
+~
+1 1 a
+1
+5 30
+
+agressivo
+$
+t 2 -
+$
+%

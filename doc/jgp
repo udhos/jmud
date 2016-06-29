@@ -1,0 +1,86 @@
+Detectores:
+----------
+
+ObjectMatcher
+NameMatcher
+IdMatcher
+CreatureIdMatcher
+VisibilityNameMatcher
+VisibilityIdMatcher
+VisibilityVerifier
+VisibilityCreatureIdMatcher
+RangeVerifier
+JobMatcher
+MasterDetector
+
+Extratores:
+----------
+
+NameExtractor
+BriefExtractor
+StringExtractor
+FancyNameExtractor
+IdExtractor
+NameIdExtractor
+TitleExtractor
+SheetExtractor
+DependenceExtractor
+NameDependenceExtractor
+
+Misc:
+----
+
+SeparatorSender
+FindCharInRoomByName
+
+==============================================================================
+
+Merger - algoritmo
+
+	Aplica uma funcao sobre cada elemento de uma lista,
+	intercalando a funcao com uma funcao que prove separadores
+	para os elementos.
+
+Enchainer - algoritmo
+
+	Lista itens de uma enumeracao.
+	Retorna concatenacao de uma string de cada item,
+	considerando o separador entre as strings e
+	possivelmente uma condicao para que as strings
+	sejam concatenadas.
+
+BoardMatcher - predicado unario 
+
+	Verifica se um item e' quadro e atende pelo
+	nome especificado.
+	Utilizado em buscas de quadro efetuadas sobre
+	listas de itens.
+
+BoardDetector - predicado unario 
+
+	Verifica se um item e' quadro.
+	Usado por BoardMatcher.
+
+PlayerVisibilityVerifier - predicado unario
+
+	Verifica se um personagem fixo pode enxergar um
+	personagem e se este ultimo e' jogador (Player).
+
+PlayerDetector - predicado unario 
+
+	Verifica se um personagem e' jogador (e nao criatura).
+	Usado por PlayerVisibilityVerifier.
+
+StringMatcher - predicado unario
+
+	Verifica se uma dada String e' a desejada.
+
+PrefixMatcher - predicado unario
+
+	Verifica se uma String comeca com o prefixo desejado.
+
+StringExtractor - functor unario
+
+	Obtem a representacao de String (metodo toString)
+	do objeto.
+

@@ -1,0 +1,24 @@
+JMUD_LANGUAGE                   = "Português (Brasil)";
+
+JMUD_CMDLINE_VERSION_SWITCH     = "-versao";
+JMUD_CMDLINE_TEST_SWITCH        = "-teste";
+
+JMUD_MSG_LANGUAGE               = "Idioma: ${JMUD_LANGUAGE}";
+JMUD_MSG_VERSION                = "Versão: ";
+JMUD_MSG_USAGE                  = "Uso: JMud ${JMUD_CMDLINE_VERSION_SWITCH} | { [-c <config>] [-p <porta>] [${JMUD_CMDLINE_TEST_SWITCH}] }";
+JMUD_MSG_REQ_CFG_FILE           = "requer arquivo de configuração";
+JMUD_MSG_REQ_NUM_VALUE          = "requer valor numérico";
+JMUD_MSG_REQ_PORT               = "requer número da porta";
+JMUD_MSG_DUP_OPT                = "Opção duplicada: ";
+JMUD_MSG_INV_OPT                = "Opção inválida: ";
+JMUD_MSG_ERROR                  = "JMud: Erro: ";
+
+JMUD_MSG_ABORTING               = "Abortando.";
+JMUD_MSG_LOADING_CONFIG         = "Carregando arquivo de configuração: ";
+JMUD_MSG_MISSING_CONFIG         = "Arquivo de configuração não encontrado: ";
+JMUD_MSG_CONFIG_IO_ERROR        = "Falha de E/S ao ler arquivo de configuração: ";
+JMUD_MSG_CONFIG_FORMAT_ERROR    = "Formato inválido do arquivo de configuração: ";
+JMUD_MSG_EMPTY_SUBVERSION       = "Arquivo de subversão vazio: ";
+JMUD_MSG_SUBVERSION_OPEN_ERROR  = "Falha ao abrir arquivo de subversão: ";
+JMUD_MSG_SUBVERSION_READ_ERROR  = "Falha ao ler arquivo de subversão: ";
+JMUD_MSG_SUBVERSION_UNDEF_ERROR = "Arquivo de subversão não definido";

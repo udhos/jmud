@@ -1,0 +1,123 @@
+<project name="JMud" default="dist" basedir=".">
+
+  <!-- Give user a chance to override without editing this file
+       (and without typing -D each time it compiles it) -->
+  <property file="build.properties" />
+  <property file="${user.home}/.ant.properties" />
+
+  <!-- Name of project and version, used to create filenames -->
+  <property name="Name"    value="JMud"/>
+  <property name="name"    value="jmud"/>
+  <property name="version" value="0.25"/>
+
+  <!-- set global properties for this build -->
+  <property name="src.dir"    value="src"/>
+  <property name="lib.dir"    value="lib"/>
+  <property name="build.dir"  value="build"/>
+  <property name="dist.dir"   value="dist"/>
+  <property name="dist.api"   value="${dist.dir}/api"/>
+  <property name="rec.dir"    value="rec"/>
+  <property name="rec.usu"    value="${rec.dir}/usu"/>
+  <property name="usu.per"    value="${rec.usu}/per"/>
+  <property name="usu.ite"    value="${rec.usu}/ite"/>
+  <property name="parser.dir" value="${src.dir}/jmud/parser"/>
+
+  <property name="java.cup.runtime" value="${lib.dir}/java_cup_runtime.jar"/>
+  <property name="javadoc" value="http://java.sun.com/j2se/1.3/docs/api"/>
+
+  <!-- Java compiler to use -->
+  <property name="build.compiler" value="classic"/>
+  <property name="build.compiler.emacs" value="on" />
+
+  <!-- Tasks -->
+
+  <target name="init" description="Initialize">
+    <tstamp>
+      <format property="subversion" pattern="yyyy.MM.dd.hh.mm.ss"/>
+    </tstamp>
+    <echo message="${subversion}" file="${rec.dir}/subversao"/>
+    <echo message="Build ${Name}-${version} (${subversion})"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${usu.per}"/>
+    <mkdir dir="${usu.ite}"/>
+  </target>
+
+  <target name="parser" description="Builds grammar parser">
+    <java jar="${lib.dir}/jlex.jar" fork='true' dir="${parser.dir}">
+      <arg value="Lexer"/>
+    </java>
+    <apply executable="bin/cup" dest="${parser.dir}">
+      <fileset dir="${parser.dir}" includes="*.cup"/>
+      <mapper type="glob" from="*.cup" to="*.java"/>
+    </apply>
+  </target>
+
+  <target name="compile" depends="init"
+	  description="Compiles the source code">
+    <javac srcdir="${src.dir}" destdir="${build.dir}"
+	   classpath="${java.cup.runtime}"
+	   encoding="latin1"/>
+  </target>
+
+  <target name="dist" depends="compile"
+	  description="Creates distribution .jar files">
+    <mkdir dir="${dist.dir}"/>
+    <unjar src="${java.cup.runtime}" dest="${build.dir}"/>
+    <jar jarfile="${dist.dir}/${name}-${version}.jar" basedir="${build.dir}"
+	 manifest="META-INF/MANIFEST.MF"/>
+  </target>
+
+  <target name="javadoc" description="Creates the API documentation">
+    <mkdir dir="${dist.api}"/>
+    <javadoc packagenames="jmud.*,jgp.*"
+             useexternalfile="yes"
+             sourcepath="${src.dir}"
+	     classpath="${java.cup.runtime}"
+	     link="${javadoc}"
+             destdir="${dist.api}"
+	     use="true"
+	     private="true"
+             author="true"
+             version="true"
+             windowtitle="${Name} API"
+             doctitle="${Name}">
+      <group title="JMud Server" packages="jmud*"/>
+      <group title="Java Generic Programming" packages="jgp*"/>
+    </javadoc>
+  </target>
+
+  <target name="run" depends="dist" description="Starts the server">
+    <java jar="${dist.dir}/${name}-${version}.jar" fork='true'/>
+  </target>
+
+  <target name="clean"
+	  description="Cleans up build and dist directories">
+    <delete dir="${build.dir}"/>
+    <delete dir="${dist.dir}"/>
+  </target>
+
+  <target name="distclean" depends="clean"
+	  description="Cleans up everything">
+    <delete>
+      <fileset dir="${rec.dir}" includes="estado,usu/per/*,usu/ite/*"/>
+      <fileset dir="${basedir}" includes="**/*~" defaultexcludes="no"/>
+    </delete>
+  </target>
+
+  <target name="dump-info" description="Echoes useful system properties">
+    <echo message="java.vm.info=${java.vm.info}" />
+    <echo message="java.vm.name=${java.vm.name}" />
+    <echo message="java.vm.vendor=${java.vm.vendor}" />
+    <echo message="java.vm.version=${java.vm.version}" />
+    <echo message="os.arch=${os.arch}" />
+    <echo message="os.name=${os.name}" />
+    <echo message="os.version=${os.version}" />
+    <echo message="java.home = ${java.home}"/>
+    <echo message="java.class.path = ${java.class.path}"/>
+    <echo message="build.compiler = ${build.compiler}"/>
+    <echo message="file.encoding=${file.encoding}" />
+    <echo message="user.home = ${user.home}"/>
+    <echo message="user.language=${user.language}" />
+  </target>
+
+</project>

@@ -1,0 +1,9 @@
+#! /bin/sh
+
+OLD=$PWD
+cd src/jmud/parser
+
+java -jar $OLD/lib/java_cup.jar -package jmud.parser -parser Parser < Parser.cup
+
+cd $OLD
+
