@@ -29,9 +29,9 @@ import jgp.interfaces.Enumerable;
 public class Finder {
 
     // encontra todas as ocorrências
-    public static Vector findAll(Enumeration enum, UnaryPredicate cmp) {
+    public static Vector findAll(Enumeration e, UnaryPredicate cmp) {
 	FinderAdd addFunc = new FinderAdd();
-	Transformer.applyIf(enum, addFunc, cmp);
+	Transformer.applyIf(e, addFunc, cmp);
 	return addFunc.getSet();
     }
 

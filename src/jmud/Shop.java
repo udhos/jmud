@@ -109,8 +109,8 @@ public class Shop implements UniqueId {
     }
 
     public boolean producesItem(int itemId) {
-	for (Enumeration enum = products.elements(); enum.hasMoreElements(); ) {
-	    Integer it = (Integer) enum.nextElement();
+	for (Enumeration e = products.elements(); e.hasMoreElements(); ) {
+	    Integer it = (Integer) e.nextElement();
 	    if (it.intValue() == itemId)
 		return true;
 	}

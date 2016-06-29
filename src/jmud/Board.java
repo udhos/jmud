@@ -133,8 +133,8 @@ public class Board implements UniqueId {
 	try {
 	    writer = new BufferedWriter(new FileWriter(fName));
 
-	    for (Enumeration enum = messages.elements(); enum.hasMoreElements(); ) {
-		BoardEntry be = (BoardEntry) enum.nextElement();
+	    for (Enumeration e = messages.elements(); e.hasMoreElements(); ) {
+		BoardEntry be = (BoardEntry) e.nextElement();
 		writer.write(Separators.BOR); writer.newLine();
 		be.save(writer);
 	    }
@@ -162,8 +162,8 @@ public class Board implements UniqueId {
     public String getSummary() {
 	String summ = "";
 	int i = 1;
-	for (Enumeration enum = messages.elements(); enum.hasMoreElements(); ++i) {
-	    BoardEntry entry = (BoardEntry) enum.nextElement();
+	for (Enumeration e = messages.elements(); e.hasMoreElements(); ++i) {
+	    BoardEntry entry = (BoardEntry) e.nextElement();
 	    summ += Separators.NL + StrUtil.formatNumber(i, 2) + ". " + entry.getHeader();
 	}
 	return summ;

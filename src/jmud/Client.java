@@ -94,8 +94,8 @@ public class Client extends Thread {
     public void lookNote() {
 	String note = "";
 	int i = 1;
-	for (Enumeration enum = text.elements(); enum.hasMoreElements(); ++i) {
-	    String str = (String) enum.nextElement();
+	for (Enumeration e = text.elements(); e.hasMoreElements(); ++i) {
+	    String str = (String) e.nextElement();
 	    note += Separators.NL + StrUtil.formatNumber(i, 2) + ": " + str;
 	}
 
@@ -142,7 +142,7 @@ public class Client extends Thread {
     }
 
   String getUserName() {
-    return clientName + " [" + getId() + "] (" + hostName + ")";
+    return clientName + " [" + playerId() + "] (" + hostName + ")";
   }
 
   String getHostName() {
@@ -153,7 +153,7 @@ public class Client extends Thread {
     return clientName.equalsIgnoreCase(name);
   }
 
-  int getId() {
+  int playerId() {
     Player plr = getPlayer();
     return plr == null ? -1 : plr.getId();
   }
@@ -569,7 +569,7 @@ public class Client extends Thread {
     // novo usuário
     if (pl == null) {
       setId(theManager.newClientId());
-      theManager.addClientMapEntry(clientName, getId());
+      theManager.addClientMapEntry(clientName, playerId());
       Log.info("Novo usuário: " + getUserName());
 
       // garante que a senha entre em vigor imediatamente

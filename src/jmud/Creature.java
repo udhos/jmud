@@ -119,8 +119,8 @@ public class Creature extends Char {
     }
 
     void randAttr() {
-	for (Enumeration enum = prototype.randModifiers.elements(); enum.hasMoreElements(); ) {
-	    RandAttr ra = (RandAttr) enum.nextElement();
+	for (Enumeration e = prototype.randModifiers.elements(); e.hasMoreElements(); ) {
+	    RandAttr ra = (RandAttr) e.nextElement();
 
 	    int target = ra.getTarget();
 	    int which = ra.getWhich();

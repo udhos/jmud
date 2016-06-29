@@ -290,16 +290,16 @@ public class World {
     }
 
     void sendToOpenPlace(String msg) {
-	for (Enumeration enum = thePlayers.elements(); enum.hasMoreElements(); ) {
-	    Char ch = (Char) enum.nextElement();
+	for (Enumeration e = thePlayers.elements(); e.hasMoreElements(); ) {
+	    Char ch = (Char) e.nextElement();
 	    if (ch.getPlace().isOpen())
 		ch.send(msg);
 	}
     }
 
     void sendToPlayers(String msg) {
-	for (Enumeration enum = thePlayers.elements(); enum.hasMoreElements(); ) {
-	    Char ch = (Char) enum.nextElement();
+	for (Enumeration e = thePlayers.elements(); e.hasMoreElements(); ) {
+	    Char ch = (Char) e.nextElement();
 	    ch.send(msg);
 	}
     }

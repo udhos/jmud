@@ -23,8 +23,8 @@ import jgp.interfaces.Appendable;
 
 public class Copy {
 
-    public static void all(Appendable app, Enumeration enum) {
-	Transformer.applyToAll(enum, new Appendor(app));
+    public static void all(Appendable app, Enumeration e) {
+	Transformer.applyToAll(e, new Appendor(app));
     }
 }
 

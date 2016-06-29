@@ -36,9 +36,9 @@ public class Searcher {
 
     // Encontra a ind-ésima ocorrência.
     // Retorna ponteiro para a ocorrência.
-    public static Object linearSearch(Enumeration enum, UnaryPredicate cmp, int ind) {
-	while (enum.hasMoreElements()) {
-	    Object curr = enum.nextElement();
+    public static Object linearSearch(Enumeration e, UnaryPredicate cmp, int ind) {
+	while (e.hasMoreElements()) {
+	    Object curr = e.nextElement();
 	    if (cmp.execute(curr) && --ind == 0)
 		return curr;
 	}
@@ -47,8 +47,8 @@ public class Searcher {
 
     // Encontra a primeira ocorrência.
     // Retorna ponteiro para a ocorrência.
-    public static Object linearSearch(Enumeration enum, UnaryPredicate cmp) {
-	return linearSearch(enum, cmp, 1);
+    public static Object linearSearch(Enumeration e, UnaryPredicate cmp) {
+	return linearSearch(e, cmp, 1);
     }
 
     // Encontra a ind-ésima ocorrência.
@@ -65,9 +65,9 @@ public class Searcher {
 
     // Encontra a ind-ésima ocorrência.
     // Retorna ponteiro para a ocorrência.
-    public static Object backLinearSearch(Enumeration enum, UnaryPredicate cmp, int ind) {
-	while (enum.hasMoreElements()) {
-	    Object curr = enum.nextElement();
+    public static Object backLinearSearch(Enumeration e, UnaryPredicate cmp, int ind) {
+	while (e.hasMoreElements()) {
+	    Object curr = e.nextElement();
 	    if (cmp.execute(curr) && --ind == 0)
 		return curr;
 	}
@@ -76,8 +76,8 @@ public class Searcher {
 
     // Encontra a primeira ocorrência.
     // Retorna ponteiro para a ocorrência.
-    public static Object backLinearSearch(Enumeration enum, UnaryPredicate cmp) {
-	return backLinearSearch(enum, cmp, 1);
+    public static Object backLinearSearch(Enumeration e, UnaryPredicate cmp) {
+	return backLinearSearch(e, cmp, 1);
     }
 
     // Encontra a ind-ésima ocorrência.

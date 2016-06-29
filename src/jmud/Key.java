@@ -54,8 +54,8 @@ public class Key extends Item {
 	int  room      = rm.getId();
 	int  direction = dr.getDirection();
 
-	for (Enumeration enum = doorReferences.elements(); enum.hasMoreElements(); ) {
-	    IntPair pair = (IntPair) enum.nextElement();
+	for (Enumeration e = doorReferences.elements(); e.hasMoreElements(); ) {
+	    IntPair pair = (IntPair) e.nextElement();
 	    if (pair.getValue1() == room && pair.getValue2() == direction)
 		return true;
 	}
@@ -67,8 +67,8 @@ public class Key extends Item {
 
 	if (invDoor != null)
 	    if (invDoor.getDestinationRoom() == rm)
-		for (Enumeration enum = doorReferences.elements(); enum.hasMoreElements(); ) {
-		    IntPair pair = (IntPair) enum.nextElement();
+		for (Enumeration e = doorReferences.elements(); e.hasMoreElements(); ) {
+		    IntPair pair = (IntPair) e.nextElement();
 		    if (pair.getValue1() == destId && pair.getValue2() == invDir)
 			return true;
 		}
@@ -81,8 +81,8 @@ public class Key extends Item {
 
     private String listDoors() {
 	String list = "";
-	for (Enumeration enum = doorReferences.elements(); enum.hasMoreElements(); ) {
-	    IntPair pair = (IntPair) enum.nextElement();
+	for (Enumeration e = doorReferences.elements(); e.hasMoreElements(); ) {
+	    IntPair pair = (IntPair) e.nextElement();
 	    list += Separators.NL + pair.getValue1() + " " + Door.getDirectionName(pair.getValue2());
 	}
 	return list;
@@ -96,8 +96,8 @@ public class Key extends Item {
     /////////////
 
     private void saveDoors(BufferedWriter writer) throws IOException {
-	for (Enumeration enum = doorReferences.elements(); enum.hasMoreElements(); ) {
-	    IntPair pair = (IntPair) enum.nextElement();
+	for (Enumeration e = doorReferences.elements(); e.hasMoreElements(); ) {
+	    IntPair pair = (IntPair) e.nextElement();
 	    writer.write((pair.getValue1() - ((KeyProto) getPrototype()).savedZoneBase)+ " " + Door.getDirectionName(pair.getValue2()).charAt(0)); writer.newLine();
 	}
 	writer.write(Separators.EOR); writer.newLine();

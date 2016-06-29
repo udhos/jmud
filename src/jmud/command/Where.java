@@ -71,14 +71,14 @@ class Where extends Command {
 
 	    String str = "";
 
-	    Enumeration enum = list.elements();
-	    if (enum.hasMoreElements()) {
-		Char ch = (Char) enum.nextElement();
+	    Enumeration e = list.elements();
+	    if (e.hasMoreElements()) {
+		Char ch = (Char) e.nextElement();
 		str += getIdent(ch);
 	    }
 
-	    while (enum.hasMoreElements()) {
-		Char ch = (Char) enum.nextElement();
+	    while (e.hasMoreElements()) {
+		Char ch = (Char) e.nextElement();
 		str += Separators.NL + getIdent(ch);
 	    }
 
@@ -90,14 +90,14 @@ class Where extends Command {
 
 	    String str = "";
 
-	    Enumeration enum = list.elements();
-	    if (enum.hasMoreElements()) {
-		Item it = (Item) enum.nextElement();
+	    Enumeration e = list.elements();
+	    if (e.hasMoreElements()) {
+		Item it = (Item) e.nextElement();
 		str += getIdent(it);
 	    }
 
-	    while (enum.hasMoreElements()) {
-		Item it = (Item) enum.nextElement();
+	    while (e.hasMoreElements()) {
+		Item it = (Item) e.nextElement();
 		str += Separators.NL + getIdent(it);
 	    }
 

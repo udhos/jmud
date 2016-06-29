@@ -104,9 +104,9 @@ public class Player extends Char {
 
     public static Player load(String name) {
 
-	for (Enumeration enum = theManager.getClientMapEnum();
-	     enum.hasMoreElements(); ) {
-	    StrIntPair pair = (StrIntPair) enum.nextElement();
+	for (Enumeration e = theManager.getClientMapEnum();
+	     e.hasMoreElements(); ) {
+	    StrIntPair pair = (StrIntPair) e.nextElement();
 	    int playerId = pair.getInt();
 	    if (name.equalsIgnoreCase(pair.getStr())) {
 		Player plr = load(playerId);

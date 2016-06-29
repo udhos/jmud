@@ -357,8 +357,8 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
 	    stopFollow();
 	//Vector fol = new Vector(getFollowers());
 	Vector fol = getFollowers();
-	for (Enumeration enum = fol.elements(); enum.hasMoreElements(); ) {
-	    Char ch = (Char) enum.nextElement();
+	for (Enumeration e = fol.elements(); e.hasMoreElements(); ) {
+	    Char ch = (Char) e.nextElement();
 	    ch.stopFollow();
 	}
     }
@@ -588,8 +588,8 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
     public void leaderWalkTo(Door dr) {
 	Place pl = getPlace();
 	if (tryWalkTo(pl, dr)) {
-	    for (Enumeration enum = getFollowers().elements(); enum.hasMoreElements(); ) {
-		Char ch = (Char) enum.nextElement();
+	    for (Enumeration e = getFollowers().elements(); e.hasMoreElements(); ) {
+		Char ch = (Char) e.nextElement();
 		if (pl == ch.getPlace() && this.canBeSeenBy(ch)) {
 		    ch.send("Você segue " + getName() + ".");
 		    ch.leaderWalkTo(dr);
@@ -662,8 +662,8 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
 
     void groupExp(int exp) {
 	int members = 1;
-	for (Enumeration enum = getFollowers().elements(); enum.hasMoreElements(); ) {
-	    Char ch = (Char) enum.nextElement();
+	for (Enumeration e = getFollowers().elements(); e.hasMoreElements(); ) {
+	    Char ch = (Char) e.nextElement();
 	    if (ch.isGrouped())
 		++members;
 	}
@@ -672,8 +672,8 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
 	else {
 	    int xp = exp / members;
 	    gainExp(xp);
-	    for (Enumeration enum = getFollowers().elements(); enum.hasMoreElements(); ) {
-		Char ch = (Char) enum.nextElement();
+	    for (Enumeration e = getFollowers().elements(); e.hasMoreElements(); ) {
+		Char ch = (Char) e.nextElement();
 		if (ch.isGrouped())
 		    ch.groupExp(xp);
 	    }
@@ -1165,8 +1165,8 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
     }
 
     public void unnaffect() {
-	for (Enumeration enum = theEffects.elements(); enum.hasMoreElements(); ) {
-	    Effect eff = (Effect) enum.nextElement();
+	for (Enumeration e = theEffects.elements(); e.hasMoreElements(); ) {
+	    Effect eff = (Effect) e.nextElement();
 	    theManager.removeEffect(eff);
 	}
     }
@@ -1543,10 +1543,10 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
 	Place plc = getPlace();
 
 	plc.action("$p tenta fugir em pânico!", true, this);
-	Enumeration enum = plc.getExits();
+	Enumeration e = plc.getExits();
 
-	if (enum.hasMoreElements()) {
-	    Door d = (Door) enum.nextElement();
+	if (e.hasMoreElements()) {
+	    Door d = (Door) e.nextElement();
 	    moveTo(d.getDestinationRoom());
 	    plc.actionNotToChar("$p fugiu para " + d.getDirectionName() + ".", true, this);
 	    look();
@@ -1713,9 +1713,9 @@ public abstract class Char implements Owner, Affectable, Named, FancyNamed, Uniq
     }
 
     boolean meetsDependenceRequirement(Ability abl) {
-	for (Enumeration enum = abl.getDependenceList();
-	     enum.hasMoreElements(); ) {
-	    Ability dep = (Ability) enum.nextElement();
+	for (Enumeration e = abl.getDependenceList();
+	     e.hasMoreElements(); ) {
+	    Ability dep = (Ability) e.nextElement();
 	    if (findAbility(dep) == null)
 		return false;
 	}

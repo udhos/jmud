@@ -32,56 +32,56 @@ public class Enchainer {
 	    rcpt.snd(none);
     }
 
-    public static int list(Recipient rcpt, Enumeration enum,
+    public static int list(Recipient rcpt, Enumeration e,
 			    UnaryFunction extractor, String separator) {
 
 	SeparatorSender sndr = new SeparatorSender(rcpt, extractor, separator);
 
-	return Transformer.countApplyToAll(enum, sndr);
+	return Transformer.countApplyToAll(e, sndr);
     }
 
     public static void list(String none,
-			   Recipient rcpt, Enumeration enum,
+			   Recipient rcpt, Enumeration e,
 			   UnaryFunction extractor, String separator) {
-	wrapNone(none, rcpt, list(rcpt, enum, extractor, separator));
+	wrapNone(none, rcpt, list(rcpt, e, extractor, separator));
     }
 
-    public static int headedList(Recipient rcpt, Enumeration enum,
+    public static int headedList(Recipient rcpt, Enumeration e,
 				  UnaryFunction extractor, String separator) {
 
-	if (!enum.hasMoreElements())
+	if (!e.hasMoreElements())
 	    return 0;
 
-	Object head = enum.nextElement();
+	Object head = e.nextElement();
 
 	SeparatorSender sndr = new SeparatorSender(rcpt, extractor, separator);
 
 	sndr.send(head);
 
-	return Transformer.countApplyToAll(enum, sndr) + 1;
+	return Transformer.countApplyToAll(e, sndr) + 1;
     }
 
     public static void headedList(String none,
-				 Recipient rcpt, Enumeration enum,
+				 Recipient rcpt, Enumeration e,
 				 UnaryFunction extractor, String separator) {
 
-	wrapNone(none, rcpt, headedList(rcpt, enum, extractor, separator));
+	wrapNone(none, rcpt, headedList(rcpt, e, extractor, separator));
     }
 
-    public static int listIf(Recipient rcpt, Enumeration enum,
+    public static int listIf(Recipient rcpt, Enumeration e,
 			     UnaryFunction extractor, String separator,
 			     UnaryPredicate condition) {
 
 	SeparatorSender sndr = new SeparatorSender(rcpt, extractor, separator);
 
-	return Transformer.countApplyIf(enum, sndr, condition);
+	return Transformer.countApplyIf(e, sndr, condition);
     }
 
-    public static int headedListIf(Recipient rcpt, Enumeration enum,
+    public static int headedListIf(Recipient rcpt, Enumeration e,
 				    UnaryFunction extractor, String separator,
 				    UnaryPredicate condition) {
 
-	Object head = Searcher.linearSearch(enum, condition);
+	Object head = Searcher.linearSearch(e, condition);
 	if (head == null)
 	    return 0;
 
@@ -89,7 +89,7 @@ public class Enchainer {
 
 	sndr.send(head);
 
-	return Transformer.countApplyIf(enum, sndr, condition) + 1;
+	return Transformer.countApplyIf(e, sndr, condition) + 1;
     }
 
 }

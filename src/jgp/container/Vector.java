@@ -43,14 +43,14 @@ public class Vector implements Enumerable, BackEnumerable, RandomAccessable, Ite
     changeCapacity(cap);
   }
 
-    public Vector(Enumeration enum) {
-	while (enum.hasMoreElements())
-	    insert(enum.nextElement());
+    public Vector(Enumeration e) {
+	while (e.hasMoreElements())
+	    insert(e.nextElement());
     }
 
   public Vector(Enumerable e) {
-    for (Enumeration enum = e.elements(); enum.hasMoreElements(); )
-      insert(enum.nextElement());
+    for (Enumeration en = e.elements(); en.hasMoreElements(); )
+      insert(en.nextElement());
   }
 
   public int getSize() {
@@ -125,8 +125,8 @@ public class Vector implements Enumerable, BackEnumerable, RandomAccessable, Ite
       if (e == this)
 	  e = new Vector(e);
 
-    for (Enumeration enum = e.elements(); enum.hasMoreElements(); )
-      insert(enum.nextElement());
+    for (Enumeration en = e.elements(); en.hasMoreElements(); )
+      insert(en.nextElement());
   }
 
   public boolean isEmpty() {

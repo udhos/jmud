@@ -54,8 +54,8 @@ public class Log {
     private static void echo(String msg, int priority, int level) {
 	msg = logLabels[level] + msg;
 	if (recipients)
-	    for (Enumeration enum = theRecipients.elements(); enum.hasMoreElements(); ) {
-		LogRecipient rec = (LogRecipient) enum.nextElement();
+	    for (Enumeration e = theRecipients.elements(); e.hasMoreElements(); ) {
+		LogRecipient rec = (LogRecipient) e.nextElement();
 		rec.forward(msg, priority);
 	    }
 	if (console)

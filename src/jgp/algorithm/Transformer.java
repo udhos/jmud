@@ -26,16 +26,16 @@ import jgp.interfaces.Enumerable;
 
 public class Transformer {
 
-    public static void applyToAll(Enumeration enum, UnaryFunction func) {
-	while (enum.hasMoreElements())
-	    func.execute(enum.nextElement());
+    public static void applyToAll(Enumeration e, UnaryFunction func) {
+	while (e.hasMoreElements())
+	    func.execute(e.nextElement());
     }
 
-    public static int countApplyToAll(Enumeration enum, UnaryFunction func) {
+    public static int countApplyToAll(Enumeration e, UnaryFunction func) {
 	int count = 0;
 
-	while (enum.hasMoreElements()) {
-	    func.execute(enum.nextElement());
+	while (e.hasMoreElements()) {
+	    func.execute(e.nextElement());
 	    ++count;
 	}
 
@@ -46,9 +46,9 @@ public class Transformer {
 	applyToAll(cont.elements(), func);
     }
 
-    public static void applyIf(Enumeration enum, UnaryFunction func, UnaryPredicate cond) {
-	while (enum.hasMoreElements()) {
-	    Object curr = enum.nextElement();
+    public static void applyIf(Enumeration e, UnaryFunction func, UnaryPredicate cond) {
+	while (e.hasMoreElements()) {
+	    Object curr = e.nextElement();
 	    if (cond.execute(curr))
 		func.execute(curr);
 	}
@@ -58,11 +58,11 @@ public class Transformer {
 	applyIf(cont.elements(), func, cond);
     }
 
-    public static int countApplyIf(Enumeration enum, UnaryFunction func, UnaryPredicate cond) {
+    public static int countApplyIf(Enumeration e, UnaryFunction func, UnaryPredicate cond) {
 	int count = 0;
 
-	while (enum.hasMoreElements()) {
-	    Object curr = enum.nextElement();
+	while (e.hasMoreElements()) {
+	    Object curr = e.nextElement();
 	    if (cond.execute(curr)) {
 		func.execute(curr);
 		++count;

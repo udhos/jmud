@@ -47,9 +47,9 @@ public class ShopCreature extends Creature {
 	return Separators.NL + StrUtil.formatNumber(ind, 6) + " " + c + " " + StrUtil.rightPad(it.getName(), 54) + " " + StrUtil.formatNumber(it.getPrice(sh.getSellTax()), 5);
     }
 
-    static Item findNextItem(Enumeration enum, Char looker) {
-	while (enum.hasMoreElements()) {
-	    Item it = (Item) enum.nextElement();
+    static Item findNextItem(Enumeration e, Char looker) {
+	while (e.hasMoreElements()) {
+	    Item it = (Item) e.nextElement();
 	    if (it.canBeSeenBy(looker))
 		return it;
 	}

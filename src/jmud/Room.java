@@ -172,8 +172,8 @@ public class Room implements Place, UniqueId, Named, Entitled, Transversable {
     }
 
     public String findDoorName(Room ro) {
-	for (Enumeration enum = theDoors.elements(); enum.hasMoreElements(); ) {
-	    Door currDoor = (Door) enum.nextElement();
+	for (Enumeration e = theDoors.elements(); e.hasMoreElements(); ) {
+	    Door currDoor = (Door) e.nextElement();
 	    if (currDoor.getDestinationRoom() == ro)
 		return currDoor.getDirectionName();
 	}
@@ -239,8 +239,8 @@ public class Room implements Place, UniqueId, Named, Entitled, Transversable {
     }
 
     public ShopCreature findShopKeeper() {
-	for (Enumeration enum = theChars.elements(); enum.hasMoreElements(); ) {
-	    Char ch = (Char) enum.nextElement();
+	for (Enumeration e = theChars.elements(); e.hasMoreElements(); ) {
+	    Char ch = (Char) e.nextElement();
 	    if (ch instanceof ShopCreature)
 		return (ShopCreature) ch;
 	}
@@ -248,8 +248,8 @@ public class Room implements Place, UniqueId, Named, Entitled, Transversable {
     }
 
     public Object[] findMaster() {
-	for (Enumeration enum = theChars.elements(); enum.hasMoreElements(); ) {
-	    Char ch = (Char) enum.nextElement();
+	for (Enumeration e = theChars.elements(); e.hasMoreElements(); ) {
+	    Char ch = (Char) e.nextElement();
 	    Master mstr = (Master) ch.findMaster();
 	    if (mstr != null) {
 		Object[] pair = new Object[2];
@@ -274,8 +274,8 @@ public class Room implements Place, UniqueId, Named, Entitled, Transversable {
     }
 
     public Door findDoorByName(String door) {
-	for (Enumeration enum = theDoors.elements(); enum.hasMoreElements(); ) {
-	    Door currDoor = (Door) enum.nextElement();
+	for (Enumeration e = theDoors.elements(); e.hasMoreElements(); ) {
+	    Door currDoor = (Door) e.nextElement();
 	    if (currDoor.leadsTo(door.substring(0, 1)))
 		return currDoor;
 	}
@@ -283,8 +283,8 @@ public class Room implements Place, UniqueId, Named, Entitled, Transversable {
     }
 
     public SuperDoor findSuperDoorByName(String door) {
-	for (Enumeration enum = theDoors.elements(); enum.hasMoreElements(); ) {
-	    SuperDoor currDoor = (SuperDoor) enum.nextElement();
+	for (Enumeration e = theDoors.elements(); e.hasMoreElements(); ) {
+	    SuperDoor currDoor = (SuperDoor) e.nextElement();
 	    if (currDoor.leadsTo(door.substring(0, 1)))
 		return currDoor;
 	}
@@ -292,8 +292,8 @@ public class Room implements Place, UniqueId, Named, Entitled, Transversable {
     }
 
     public Door findDoorByDir(int dir) {
-	for (Enumeration enum = theDoors.elements(); enum.hasMoreElements(); ) {
-	    Door currDoor = (Door) enum.nextElement();
+	for (Enumeration e = theDoors.elements(); e.hasMoreElements(); ) {
+	    Door currDoor = (Door) e.nextElement();
 	    if (currDoor.getDirection() == dir)
 		return currDoor;
 	}

@@ -22,18 +22,18 @@ import jgp.functor.UnaryFunction;
 
 public class Merger {
 
-    public static void list(Enumeration enum, UnaryFunction performer, UnaryFunction separator) {
-	while (enum.hasMoreElements()) {
-	    Object obj = enum.nextElement();
+    public static void list(Enumeration e, UnaryFunction performer, UnaryFunction separator) {
+	while (e.hasMoreElements()) {
+	    Object obj = e.nextElement();
 	    separator.execute(obj);
 	    performer.execute(obj);
 	}
     }
 
-    public static void headedList(Enumeration enum, UnaryFunction performer, UnaryFunction separator) {
-	if (enum.hasMoreElements()) {
-	    performer.execute(enum.nextElement());
-	    list(enum, performer, separator);
+    public static void headedList(Enumeration e, UnaryFunction performer, UnaryFunction separator) {
+	if (e.hasMoreElements()) {
+	    performer.execute(e.nextElement());
+	    list(e, performer, separator);
 	}
     }
 }

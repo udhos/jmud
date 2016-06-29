@@ -371,45 +371,45 @@ public class StrUtil {
 	return adjustSex(str, female, '*');
     }
 
-    static public String headedConcat(Enumeration enum, UnaryFunction extractor, String sep) {
-	String str = enum.hasMoreElements() ? (String) extractor.execute(enum.nextElement()) : "";
+    static public String headedConcat(Enumeration e, UnaryFunction extractor, String sep) {
+	String str = e.hasMoreElements() ? (String) extractor.execute(e.nextElement()) : "";
 
-	while (enum.hasMoreElements())
-	    str += sep + (String) extractor.execute(enum.nextElement());
+	while (e.hasMoreElements())
+	    str += sep + (String) extractor.execute(e.nextElement());
 
 	return str;
     }
 
-    static public String concat(Enumeration enum, UnaryFunction extractor, String sep) {
+    static public String concat(Enumeration e, UnaryFunction extractor, String sep) {
 	String str = "";
 
-	while (enum.hasMoreElements())
-	    str += sep + (String) extractor.execute(enum.nextElement());
+	while (e.hasMoreElements())
+	    str += sep + (String) extractor.execute(e.nextElement());
 
 	return str;
     }
 
-    static public String headedConcat(Enumeration enum, String sep) {
-	return headedConcat(enum, new StringExtractor(), sep);
+    static public String headedConcat(Enumeration e, String sep) {
+	return headedConcat(e, new StringExtractor(), sep);
     }
 
-    static public String headedConcat(Enumeration enum, String sep, String none) {
-	if (!enum.hasMoreElements())
+    static public String headedConcat(Enumeration e, String sep, String none) {
+	if (!e.hasMoreElements())
 	    return none;
 
-	return headedConcat(enum, new StringExtractor(), sep);
+	return headedConcat(e, new StringExtractor(), sep);
     }
 
-    static public String concat(Enumeration enum, String sep) {
-	return concat(enum, new StringExtractor(), sep);
+    static public String concat(Enumeration e, String sep) {
+	return concat(e, new StringExtractor(), sep);
     }
 
-    static public String concat(Enumeration enum, String sep, String none) {
+    static public String concat(Enumeration e, String sep, String none) {
 
-	if (!enum.hasMoreElements())
+	if (!e.hasMoreElements())
 	    return none;
 
-	return concat(enum, sep);
+	return concat(e, sep);
     }
 
     /*

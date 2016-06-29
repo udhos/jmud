@@ -371,8 +371,8 @@ public class CreatureProto implements UniqueId {
 
     private String randModList() {
 	String list = "";
-	for (Enumeration enum = randModifiers.elements(); enum.hasMoreElements(); ) {
-	    RandAttr ra = (RandAttr) enum.nextElement();
+	for (Enumeration e = randModifiers.elements(); e.hasMoreElements(); ) {
+	    RandAttr ra = (RandAttr) e.nextElement();
 	    list += Separators.NL + ra.getSheet();
 	}
 	return list;

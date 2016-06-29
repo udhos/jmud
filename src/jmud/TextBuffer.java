@@ -70,8 +70,8 @@ class TextBuffer implements Enumerable {
 
     public String toString() {
 	String txt = "";
-	for (Enumeration enum = buf.elements(); enum.hasMoreElements(); ) {
-	    String str = (String) enum.nextElement();
+	for (Enumeration e = buf.elements(); e.hasMoreElements(); ) {
+	    String str = (String) e.nextElement();
 	    txt += ((txt.length() == 0) ? str : (Separators.NL + str));
 	}
 	return txt;

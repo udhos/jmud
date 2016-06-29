@@ -229,8 +229,8 @@ public class Manager implements LogRecipient, StateUser {
 
     public String listClientMap() {
 	String list = "";
-	for (Enumeration enum = getClientMapEnum(); enum.hasMoreElements(); ) {
-	    StrIntPair pair = (StrIntPair) enum.nextElement();
+	for (Enumeration e = getClientMapEnum(); e.hasMoreElements(); ) {
+	    StrIntPair pair = (StrIntPair) e.nextElement();
 	    list += Separators.NL + StrUtil.rightPad(pair.getStr(), Client.MAX_NAME_LENGTH) + " " + StrUtil.formatNumber(pair.getInt(), 5);
 	}
 	return list;

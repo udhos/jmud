@@ -517,15 +517,15 @@ public class Zone implements UniqueId {
 	}
 
 	SyntaxList list = (SyntaxList) tree;
-	for (Enumeration enum = list.elements(); enum.hasMoreElements(); ) {
-	    SyntaxNode node = (SyntaxNode) enum.nextElement();
+	for (Enumeration e = list.elements(); e.hasMoreElements(); ) {
+	    SyntaxNode node = (SyntaxNode) e.nextElement();
 	    if (node instanceof SyntaxMap) {
 		SyntaxMap map = (SyntaxMap) node;
 		try {
 		    theWorld.insertMaster(new Master(base, map, identPrefix, identInc));
 		}
-		catch(SyntaxException e) {
-		    Log.err("Falha ao criar mestre: " + e.getMessage());
+		catch(SyntaxException ex) {
+		    Log.err("Falha ao criar mestre: " + ex.getMessage());
 		    map.show(Log.getStream(), identPrefix, identInc);
 		}
 	    }

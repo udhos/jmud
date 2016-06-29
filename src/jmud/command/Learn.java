@@ -55,13 +55,13 @@ class Learn extends Command {
 	String opt = toker.nextToken();
 
 	if (Keywords.JOB.startsWith(opt)) {
-	    Enumeration enum = mstr.getJobs();
+	    Enumeration e = mstr.getJobs();
 
 	    if (!toker.hasMoreTokens()) {
 		aChar.send("PROFISSÃO MÁXIMO NÍVEL PRÓXIMO EXPERIÊNCIA\n" +
                            "--------- ------ ----- ------- -----------");
-		while (enum.hasMoreElements()) {
-		    JobTitle jt      = (JobTitle) enum.nextElement();
+		while (e.hasMoreElements()) {
+		    JobTitle jt      = (JobTitle) e.nextElement();
 		    Job jb           = jt.getJob();
 		    String jbName    = jb.getName();
 		    int maxLevel     = jt.getLevel();
@@ -129,7 +129,7 @@ class Learn extends Command {
 	}
 
 	if (Keywords.ABILITY.startsWith(opt)) {
-	    Enumeration enum = mstr.getAbilities();
+	    Enumeration e = mstr.getAbilities();
 
 	    if (!toker.hasMoreTokens()) {
 		return;

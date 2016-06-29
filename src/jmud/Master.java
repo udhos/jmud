@@ -65,8 +65,8 @@ public class Master implements UniqueId {
 	if (masteredAbilitiesValue != null) {
 	    if (masteredAbilitiesValue instanceof SyntaxMap) {
 		SyntaxMap abMap = (SyntaxMap) masteredAbilitiesValue;
-		for (Enumeration enum = abMap.keys(); enum.hasMoreElements(); ) {
-		    SyntaxLValue key = (SyntaxLValue) enum.nextElement();
+		for (Enumeration e = abMap.keys(); e.hasMoreElements(); ) {
+		    SyntaxLValue key = (SyntaxLValue) e.nextElement();
 		    String abName = key.getString();
 		    Ability ab = AbilityTable.findAbilityByName(abName);
 		    if (ab == null) {
@@ -84,7 +84,7 @@ public class Master implements UniqueId {
 		    try {
 			level = Integer.parseInt(abLevel);
 		    }
-		    catch (NumberFormatException e) {
+		    catch (NumberFormatException ex) {
 			Log.err("Nível inválido para habilidade '" + abName + "':" + abLevel);
 			continue;
 		    }
@@ -97,8 +97,8 @@ public class Master implements UniqueId {
 	if (masteredJobsValue != null) {
 	    if (masteredJobsValue instanceof SyntaxMap) {
 		SyntaxMap jbMap = (SyntaxMap) masteredJobsValue;
-		for (Enumeration enum = jbMap.keys(); enum.hasMoreElements(); ) {
-		    SyntaxLValue key = (SyntaxLValue) enum.nextElement();
+		for (Enumeration e = jbMap.keys(); e.hasMoreElements(); ) {
+		    SyntaxLValue key = (SyntaxLValue) e.nextElement();
 		    String jbName = key.getString();
 		    Job jb = JobTable.findJobByName(jbName);
 		    if (jb == null) {
@@ -116,7 +116,7 @@ public class Master implements UniqueId {
 		    try {
 			level = Integer.parseInt(jbLevel);
 		    }
-		    catch (NumberFormatException e) {
+		    catch (NumberFormatException ex) {
 			Log.err("Nível inválido para profissão '" + jbName + "':" + jbLevel);
 			continue;
 		    }

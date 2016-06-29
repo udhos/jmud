@@ -90,8 +90,8 @@ class KeyProto extends ItemProto {
 
     private String listDoors() {
 	String list = "";
-	for (Enumeration enum = doorReferences.elements(); enum.hasMoreElements(); ) {
-	    IntPair pair = (IntPair) enum.nextElement();
+	for (Enumeration e = doorReferences.elements(); e.hasMoreElements(); ) {
+	    IntPair pair = (IntPair) e.nextElement();
 	    list += Separators.NL + (pair.getValue1() - savedZoneBase) + " " + Door.getDirectionName(pair.getValue2());
 	}
 	return list;

@@ -35,8 +35,8 @@ public abstract class Hook implements Named {
     public static int apply(Place plc, int context, Char vict, int subContext) {
 
 	int count = 0;
-	for (Enumeration enum = plc.getChars(); enum.hasMoreElements(); ) {
-	    Char currCh = (Char) enum.nextElement();
+	for (Enumeration e = plc.getChars(); e.hasMoreElements(); ) {
+	    Char currCh = (Char) e.nextElement();
 	    if (!(currCh instanceof Creature))
 		continue;
 
